@@ -1,2 +1,2 @@
 # Vossen-Konijnen
-Vossen&amp;Konijnen
+Dit is het project Vossen & Konijnen :D
