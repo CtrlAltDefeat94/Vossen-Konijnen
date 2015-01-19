@@ -1,21 +1,25 @@
-import java.util.*;
-/**
- * Write a description of class Animal here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public abstract class Animal implements Actor
-{
-     // Whether the rabbit is alive or not.
-    private boolean alive;
-    // The rabbit's position.
-    private Location location;
-    // The field occupied.
-    private Field field;
+import java.util.List;
 
+/**
+ * A class representing shared characteristics of animals.
+ * 
+ * @author David J. Barnes and Michael Kölling
+ * @version 2011.07.31
+ */
+public abstract class Animal
+{
+    // Whether the animal is alive or not.
+    private boolean alive;
+    // The animal's field.
+    private Field field;
+    // The animal's position in the field.
+    private Location location;
+    
     /**
-     * Constructor for objects of class Animal
+     * Create a new animal at location in field.
+     * 
+     * @param field The field currently occupied.
+     * @param location The location within the field.
      */
     public Animal(Field field, Location location)
     {
@@ -24,41 +28,24 @@ public abstract class Animal implements Actor
         setLocation(location);
     }
     
-     /**
+    /**
      * Make this animal act - that is: make it do
      * whatever it wants/needs to do.
      * @param newAnimals A list to receive newly born animals.
      */
-    abstract public void act(List<Actor> newAnimals);
-    
+    abstract public void act(List<Animal> newAnimals);
+
     /**
-     * get field
+     * Check whether the animal is alive or not.
+     * @return true if the animal is still alive.
      */
-    public Field getField()
+    protected boolean isAlive()
     {
-        return field;
+        return alive;
     }
 
     /**
-     * Return the animal's location.
-     * @return The animal's location.
-     */
-    public Location getLocation()
-    {
-        return location;
-    }
-    
-    /**
-     * Check whether the fox is alive or not.
-     * @return True if the fox is still alive.
-     */
-    public boolean isActive()
-    {
-        return alive;
-    }    
-    
-    /**
-     * Indicate that the fox is no longer alive.
+     * Indicate that the animal is no longer alive.
      * It is removed from the field.
      */
     protected void setDead()
@@ -70,7 +57,16 @@ public abstract class Animal implements Actor
             field = null;
         }
     }
-        
+
+    /**
+     * Return the animal's location.
+     * @return The animal's location.
+     */
+    protected Location getLocation()
+    {
+        return location;
+    }
+    
     /**
      * Place the animal at the new location in the given field.
      * @param newLocation The animal's new location.
@@ -84,4 +80,12 @@ public abstract class Animal implements Actor
         field.place(this, newLocation);
     }
     
+    /**
+     * Return the animal's field.
+     * @return The animal's field.
+     */
+    protected Field getField()
+    {
+        return field;
+    }
 }
