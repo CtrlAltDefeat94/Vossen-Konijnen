@@ -16,6 +16,8 @@ import java.util.Map;
  */
 public class SimulatorView extends JFrame
 {
+	private Simulator simulator;
+	
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
 
@@ -41,6 +43,21 @@ public class SimulatorView extends JFrame
     {
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
+        
+        JPanel leftMenu = new JPanel();
+		leftMenu.setLayout(new GridLayout(0, 1));
+        
+        JButton oneStepButton = new JButton("One Step");
+        oneStepButton.addActionListener(new ActionListener() {
+                           public void actionPerformed(ActionEvent e) { simulator.simulate(1); }
+                       });
+        leftMenu.add(oneStepButton);
+        
+        JButton hundredStepButton = new JButton("Hundred Step");
+        hundredStepButton.addActionListener(new ActionListener() {
+                           public void actionPerformed(ActionEvent e) { simulator.simulate(100); }
+                       });
+        leftMenu.add(hundredStepButton);
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
@@ -54,8 +71,15 @@ public class SimulatorView extends JFrame
         contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
+        contents.add(leftMenu, BorderLayout.WEST);
+        
         pack();
         setVisible(true);
+    }
+    
+    public void setSimulator(Simulator simulator)
+    {
+    	this.simulator = simulator;    
     }
     
     /**
