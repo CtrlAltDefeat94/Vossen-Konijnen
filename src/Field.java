@@ -130,6 +130,23 @@ public class Field
         }
         return free;
     }
+    /**
+     * Checks if a location has no objects nearby
+     * @return 
+     */
+    public boolean alone(Location location)
+    {
+    	List<Location> adjacent = adjacentLocations(location);
+        for(Location next : adjacent) 
+        {
+            if(getObjectAt(next) != null) 
+            {
+            	return false;
+            }
+        }
+        return true;
+    }
+  
     
     /**
      * Try to find a free location that is adjacent to the

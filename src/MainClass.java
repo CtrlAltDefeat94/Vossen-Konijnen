@@ -7,7 +7,8 @@ public class MainClass
      */
     public static void main(String [] args)
     {
-    	new Simulator();
+    	new Simulator().simulate(500);    	
+    	//new Simulator();
     }    
 
 }

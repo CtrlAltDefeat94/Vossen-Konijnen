@@ -9,11 +9,11 @@ import java.util.List;
 public abstract class Animal
 {
     // Whether the animal is alive or not.
-    private boolean alive;
+    protected boolean alive;
     // The animal's field.
-    private Field field;
+    protected Field field;
     // The animal's position in the field.
-    private Location location;
+    protected Location location;
     
     /**
      * Create a new animal at location in field.

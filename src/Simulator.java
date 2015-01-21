@@ -22,6 +22,8 @@ public class Simulator
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    // The probability that a borg will be created in any given grid position.
+    private static final double BORG_CREATION_PROBABILITY = 0.04;
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -61,6 +63,7 @@ public class Simulator
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
+        view.setColor(Borg.class, Color.GREEN);
         view.setSimulator(this);
         
         // Setup a valid starting point.
@@ -70,6 +73,10 @@ public class Simulator
     public int getStep()
     {
     	return step;
+    }
+    public SimulatorView getSimulatorView()
+    {
+    	return view;   
     }
     
     /**
@@ -151,6 +158,12 @@ public class Simulator
                     Rabbit rabbit = new Rabbit(true, field, location);
                     animals.add(rabbit);
                 }
+                else if(rand.nextDouble() <= BORG_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Borg borg = new Borg(true, field, location);
+                    animals.add(borg);
+                }
+
                 // else leave the location empty.
             }
         }
