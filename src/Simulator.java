@@ -67,19 +67,18 @@ public class Simulator
         reset();
     }
     
-    public static void main(String [] args)
+    public int getStep()
     {
-    	Simulator simulator = new Simulator();
-    	simulator.runLongSimulation();
+    	return step;
     }
     
     /**
      * Run the simulation from its current state for a reasonably long period,
-     * (1500 steps).
+     * (500 steps).
      */
     public void runLongSimulation()
     {
-        simulate(100);
+        simulate(500);
     }
     
     /**
