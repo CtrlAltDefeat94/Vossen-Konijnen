@@ -24,6 +24,10 @@ public class Simulator
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
     // The probability that a borg will be created in any given grid position.
     private static final double BORG_CREATION_PROBABILITY = 0.04;
+    // The probability that a hunter will be created in any given grid position.
+    private static final double HUNTER_CREATION_PROBABILITY = 0.003;
+    // The maximum amount of hunters
+    private static final int MAX_HUNTERS = 25;
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -64,6 +68,7 @@ public class Simulator
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
         view.setColor(Borg.class, Color.BLACK);
+        view.setColor(Hunter.class, Color.RED);
         view.setSimulator(this);
         
         // Setup a valid starting point.
@@ -146,6 +151,7 @@ public class Simulator
     {
         Random rand = Randomizer.getRandom();
         field.clear();
+        int hunterAmount = 0;
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
@@ -163,7 +169,12 @@ public class Simulator
                     Borg borg = new Borg(true, field, location);
                     animals.add(borg);
                 }
-
+                else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY && hunterAmount <=MAX_HUNTERS) {
+                    Location location = new Location(row, col);
+                    Hunter hunter = new Hunter(true, field, location);
+                    animals.add(hunter);
+                    hunterAmount++;
+                }
                 // else leave the location empty.
             }
         }
