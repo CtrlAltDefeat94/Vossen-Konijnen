@@ -3,11 +3,11 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * A simple model of a fox.
- * Foxes age, move, eat rabbits, and die.
+ * A simple model of a borg.
+ * borg age, move, assimilate, and die.
  * 
- * @author David J. Barnes and Michael KÃ¶lling
- * @version 2011.07.31
+ * @author Daniël Slobben
+ * @version 2015.01.22
  */
 public class Borg extends Animal
 {
@@ -47,10 +47,10 @@ public class Borg extends Animal
     
     /**
      * This is what the Borg does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
+     * rabbits. In the process, it might assimilate, die of hunger,
      * or die of old age.
      * @param field The field currently occupied.
-     * @param newBorg A list to return newly born Borg.
+     * @param newBorg A list to return newly assimilated Borg.
      */
     public void act(List<Animal> newBorg)
     {

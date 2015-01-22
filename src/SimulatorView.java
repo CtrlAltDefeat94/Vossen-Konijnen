@@ -55,7 +55,19 @@ public class SimulatorView extends JFrame
         
         JButton hundredStepButton = new JButton("Hundred Step");
         hundredStepButton.addActionListener(new ActionListener() {
-                           public void actionPerformed(ActionEvent e) { simulator.simulate(100); }
+                           public void actionPerformed(ActionEvent e) {
+                        	    
+                        	    disableButton(hundredStepButton);
+                        	    Thread thread = new Thread(new Runnable(){
+
+                        	     @Override
+                        	     public void run() {
+                        	      simulator.simulate(100);
+                                  enableButton(hundredStepButton);
+                        	     }
+                        	     
+                        	    });
+                        	    thread.start();}
                        });
         leftMenu.add(hundredStepButton);
 
@@ -80,6 +92,15 @@ public class SimulatorView extends JFrame
     public void setSimulator(Simulator simulator)
     {
     	this.simulator = simulator;    
+    }
+    
+    private void disableButton(JButton button)
+    {
+    	button.setEnabled(false);
+    }
+    private void enableButton(JButton button)
+    {
+    	button.setEnabled(true);
     }
     
     /**
