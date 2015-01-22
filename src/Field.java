@@ -141,7 +141,10 @@ public class Field
         {
             if(getObjectAt(next) != null) 
             {
-            	return false;
+            	if (getObjectAt(next) instanceof Borg)
+            	{
+            	    return false;
+            	}
             }
         }
         return true;

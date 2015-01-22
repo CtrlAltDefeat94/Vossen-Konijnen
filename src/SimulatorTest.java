@@ -1,9 +1,6 @@
 import static org.junit.Assert.*;
 
-import java.lang.reflect.Method;
-
 import org.junit.Test;
-
 
 public class SimulatorTest {
 
@@ -17,7 +14,7 @@ public class SimulatorTest {
 	@Test
 	public void testRunLongSimulation()
 	{
-		Simulator simulator = new Simulator();
+		Simulator simulator = new Simulator(300, 300);
 		simulator.runLongSimulation();
 		assertEquals(500, simulator.getStep());
 	}

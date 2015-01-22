@@ -14,7 +14,7 @@ public class Borg extends Animal
     // Characteristics shared by Borg (class variables).
     
     // The age to which a fox can live.
-    private static final int MAX_AGE = 200;
+    private static final int MAX_AGE = 100;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -37,11 +37,11 @@ public class Borg extends Animal
         super(field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            energyLevel = rand.nextInt(3);
+            energyLevel = rand.nextInt(15);
         }
         else {
             age = 0;
-            energyLevel = 3;
+            energyLevel = 10;
         }
     }
     
@@ -68,7 +68,7 @@ public class Borg extends Animal
                 if(locationVictim == null) { 
                     // No victim found -- move
                 	newLocation = getField().freeAdjacentLocation(getLocation());
-                	
+                	energyLevel--;            		
                 }
         	}
         	else
@@ -86,14 +86,15 @@ public class Borg extends Animal
             {
         		if (newLocation != null) 
         		{
-                    setLocation(newLocation); 
+                    setLocation(newLocation);
+                    energyLevel++;
         		}
             }            
         }
     }
 
     /**
-     * Increase the age. This could result in the fox's death.
+     * Increase the age. This could result in the borg death.
      */
     private void incrementAge()
     {
