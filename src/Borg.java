@@ -21,7 +21,7 @@ public class Borg extends Animal
     // Individual characteristics (instance fields).
     // The Borg age.
     private int age;
-    // The Borg level, which is increased by eating rabbits.
+    // The Borg level, which is increased by standing still.
     private int energyLevel;
 
     /**
@@ -87,7 +87,7 @@ public class Borg extends Animal
         		if (newLocation != null) 
         		{
                     setLocation(newLocation);
-                    energyLevel++;
+                    energyLevel += 2;
         		}
             }            
         }
@@ -120,15 +120,29 @@ public class Borg extends Animal
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
                 if(rabbit.isAlive()) { 
-                    rabbit.setDead();
-                    return where;
+                	if (rand.nextInt(2) == 0)
+            		{
+                		rabbit.setDead();
+                        return where;
+            		}
+                	else {
+                		return null;
+                	}
+                    
                 }                
             }
             if (animal instanceof Fox) {
             	Fox fox = (Fox) animal;
             	if(fox.isAlive()) {
-            		fox.setDead();
-            		return where;            		
+            		if (rand.nextInt(2) == 0)
+            		{
+            			fox.setDead();
+                		return where;              			
+            		}
+            		else {
+            			return null;
+            		}
+            		          		
             	}
             }
         }

@@ -41,39 +41,17 @@ public class SimulatorView extends JFrame
      */
     public SimulatorView(int height, int width)
     {
+
+        setJMenuBar(createMenu());
         stats = new FieldStats();
         colors = new LinkedHashMap<Class, Color>();
         
-        JPanel leftMenu = new JPanel();
-		leftMenu.setLayout(new GridLayout(0, 1));
         
-        JButton oneStepButton = new JButton("One Step");
-        oneStepButton.addActionListener(new ActionListener() {
-                           public void actionPerformed(ActionEvent e) { simulator.simulate(1); }
-                       });
-        leftMenu.add(oneStepButton);
-        
-        JButton hundredStepButton = new JButton("Hundred Step");
-        hundredStepButton.addActionListener(new ActionListener() {
-                           public void actionPerformed(ActionEvent e) {
-                        	    
-                        	    disableButton(hundredStepButton);
-                        	    Thread thread = new Thread(new Runnable(){
-
-                        	     @Override
-                        	     public void run() {
-                        	      simulator.simulate(100);
-                                  enableButton(hundredStepButton);
-                        	     }
-                        	     
-                        	    });
-                        	    thread.start();}
-                       });
-        leftMenu.add(hundredStepButton);
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+        JPanel leftMenu = createButtons();
         
         setLocation(100, 50);
         
@@ -171,6 +149,58 @@ public class SimulatorView extends JFrame
         return stats.isViable(field);
     }
     
+    private JMenuBar createMenu()
+    {
+    	JMenuBar menuBar = new JMenuBar();
+    	JMenu menu = new JMenu("Options");
+    	menuBar.add(menu);
+    	JMenuItem quit = new JMenuItem("Quit");
+    	quit.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) { System.exit(0); }
+    	});
+    	menu.add(quit);
+    	return menuBar;
+    }
+    
+    private JPanel createButtons()
+    {
+    	JPanel leftMenu = new JPanel();
+		leftMenu.setLayout(new GridLayout(0, 1));
+        
+        JButton oneStepButton = new JButton("One Step");
+        oneStepButton.addActionListener(new ActionListener() {
+                           public void actionPerformed(ActionEvent e) { simulator.simulate(1); }
+                       });
+        leftMenu.add(oneStepButton);
+        
+        JButton hundredStepButton = new JButton("Hundred Step");
+        hundredStepButton.addActionListener(new ActionListener() {
+                           public void actionPerformed(ActionEvent e) {
+                        	    
+                        	    disableButton(hundredStepButton);
+                        	    Thread thread = new Thread(new Runnable(){
+
+                        	     @Override
+                        	     public void run() {
+                        	      simulator.simulate(100);
+                                  enableButton(hundredStepButton);
+                        	     }
+                        	     
+                        	    });
+                        	    thread.start();}
+                       });
+        leftMenu.add(hundredStepButton);
+        
+        JButton resetButton = new JButton("Reset");
+		resetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				simulator.reset();
+			}
+		});
+		leftMenu.add(resetButton);
+        return leftMenu;
+    }
+    
     /**
      * Provide a graphical view of a rectangular field. This is 
      * a nested class (a class defined inside a class) which
@@ -256,5 +286,6 @@ public class SimulatorView extends JFrame
                 }
             }
         }
+        
     }
 }
