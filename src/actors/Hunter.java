@@ -1,33 +1,31 @@
-package vk.actors;
+package actors;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Random;
 
-import vk.field.Field;
-import vk.field.Location;
-import vk.field.Randomizer;
+import field.Field;
+import field.Location;
+import field.Randomizer;
 
 /**
- * A simple model of a borg.
- * borg age, move, assimilate, and die.
+ * A simple model of a hunter.
+ * hunters move and hunt.
  * 
- * @author Daniël Slobben
+ * @author Mathijs Lindeboom
  * @version 2015.01.22
  */
-public class Borg extends Animal
+public class Hunter extends Animal
 {
-    // Characteristics shared by Borg (class variables).
+    // Characteristics shared by hunters (class variables).
     
-    // The age to which a fox can live.
+    // The age to which a hunter can live.
     private static final int MAX_AGE = 100;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
-    // The Borg age.
+    // The hunter's age.
     private int age;
-    // The Borg level, which is increased by standing still.
-    private int energyLevel;
 
     /**
      * Create a Borg. A Borg can be created as a new born (age zero
@@ -37,16 +35,14 @@ public class Borg extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Borg(boolean randomAge, Field field, Location location)
+    public Hunter(boolean randomAge, Field field, Location location)
     {
         super(field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            energyLevel = rand.nextInt(15);
         }
         else {
             age = 0;
-            energyLevel = 10;
         }
     }
     
@@ -55,67 +51,33 @@ public class Borg extends Animal
      * rabbits. In the process, it might assimilate, die of hunger,
      * or die of old age.
      * @param field The field currently occupied.
-     * @param newBorg A list to return newly assimilated Borg.
+     * @param newHunt A list to return newly assimilated Borg.
      */
     @Override
-	public void act(List<Animal> newBorg)
+	public void act(List<Animal> newHunt)
     {
-        incrementAge();
         if(isAlive()) {
         	Location newLocation = null;        	
-        	if (energyLevel >= 1)
-        	{
-        	    Location locationVictim = assimilate();
-        	    if (locationVictim != null)
-        	    {
-                    newBorg.add(new Borg(false, field, locationVictim));
-                    energyLevel--;
-        	    }
-                if(locationVictim == null) { 
-                    // No victim found -- move
-                	newLocation = getField().freeAdjacentLocation(getLocation());
-                	energyLevel--;            		
-                }
-        	}
-        	else
-        	{
-        		newLocation = getField().freeAdjacentLocation(getLocation());
-        	}
-        	if (getField().alone(getLocation()) == true)
-        	{
-        		if (rand.nextInt(3) == 0)
-        		{
-        		    setDead();
-        		}
-       		}        	
-        	else
-            {
-        		if (newLocation != null) 
-        		{
-                    setLocation(newLocation);
-                    energyLevel += 2;
-        		}
-            }            
+        	Location locationVictim = hunt();
+    	    
+            if(locationVictim == null) { 
+                // No victim found -- move
+            	newLocation = getField().freeAdjacentLocation(getLocation());            		
+            }
         }
     }
 
     /**
      * Increase the age. This could result in the borg death.
      */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
+    
     
     /**
      * Look for victim adjacent to the current location.
      * Only the first live Victim is eaten.
      * @return Where a victim was found, or null if it wasn't.
      */
-    private Location assimilate()
+    private Location hunt()
     {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
@@ -123,12 +85,12 @@ public class Borg extends Animal
         while(it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()) { 
+            if(animal instanceof Borg) {
+                Borg borg = (Borg) animal;
+                if(borg.isAlive()) { 
                 	if (rand.nextInt(2) == 0)
             		{
-                		rabbit.setDead();
+                		borg.setDead();
                         return where;
             		}
                 	else {
@@ -155,4 +117,3 @@ public class Borg extends Animal
         return null;
     }
 }
-

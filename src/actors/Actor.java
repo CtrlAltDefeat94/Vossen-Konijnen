@@ -1,4 +1,4 @@
-package vk.actors;
+package actors;
 import java.util.*;
 /**
  * Write a description of interface Actor here.

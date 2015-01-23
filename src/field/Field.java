@@ -1,10 +1,10 @@
-package vk.field;
+package field;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import vk.actors.Borg;
+import actors.Borg;
 
 /**
  * Represent a rectangular grid of field positions.

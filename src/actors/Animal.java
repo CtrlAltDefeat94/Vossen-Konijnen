@@ -1,9 +1,9 @@
-package vk.actors;
+package actors;
 
 import java.util.List;
 
-import vk.field.Field;
-import vk.field.Location;
+import field.Field;
+import field.Location;
 
 /**
  * A class representing shared characteristics of animals.

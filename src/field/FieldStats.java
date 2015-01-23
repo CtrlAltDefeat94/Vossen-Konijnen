@@ -1,4 +1,4 @@
-package vk.field;
+package field;
 import java.util.HashMap;
 
 /**

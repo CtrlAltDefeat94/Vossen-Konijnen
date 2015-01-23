@@ -1,6 +1,6 @@
-package vk.main;
+package main;
 
-import vk.simulator.Simulator;
+import simulator.Simulator;
 
 public class MainClass 
 {

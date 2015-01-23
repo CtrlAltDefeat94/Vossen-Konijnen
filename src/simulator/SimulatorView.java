@@ -1,11 +1,11 @@
-package vk.simulator;
+package simulator;
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import vk.field.Field;
-import vk.field.FieldStats;
+import field.Field;
+import field.FieldStats;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

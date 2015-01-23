@@ -1,4 +1,4 @@
-package vk.field;
+package field;
 /**
  * Represent a location in a rectangular grid.
  * 
