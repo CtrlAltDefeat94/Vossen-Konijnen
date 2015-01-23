@@ -1,6 +1,12 @@
+package vk.simulator;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+import vk.field.Field;
+import vk.field.FieldStats;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -49,8 +55,8 @@ public class SimulatorView extends JFrame
         
 
         setTitle("Fox and Rabbit Simulation");
-        stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
-        population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+        stepLabel = new JLabel(STEP_PREFIX, SwingConstants.CENTER);
+        population = new JLabel(POPULATION_PREFIX, SwingConstants.CENTER);
         JPanel leftMenu = createButtons();
         
         setLocation(100, 50);
@@ -156,7 +162,8 @@ public class SimulatorView extends JFrame
     	menuBar.add(menu);
     	JMenuItem quit = new JMenuItem("Quit");
     	quit.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent e) { System.exit(0); }
+    		@Override
+			public void actionPerformed(ActionEvent e) { System.exit(0); }
     	});
     	menu.add(quit);
     	menu = new JMenu("Views");
@@ -191,13 +198,15 @@ public class SimulatorView extends JFrame
         
         JButton oneStepButton = new JButton("One Step");
         oneStepButton.addActionListener(new ActionListener() {
-                           public void actionPerformed(ActionEvent e) { simulator.simulate(1); }
+                           @Override
+						public void actionPerformed(ActionEvent e) { simulator.simulate(1); }
                        });
         leftMenu.add(oneStepButton);
         
         JButton hundredStepButton = new JButton("Hundred Step");
         hundredStepButton.addActionListener(new ActionListener() {
-                           public void actionPerformed(ActionEvent e) {
+                           @Override
+						public void actionPerformed(ActionEvent e) {
                         	    
                         	    disableButton(hundredStepButton);
                         	    Thread thread = new Thread(new Runnable(){
@@ -215,6 +224,7 @@ public class SimulatorView extends JFrame
         
         JButton resetButton = new JButton("Reset");
 		resetButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				simulator.reset();
 			}
@@ -254,7 +264,8 @@ public class SimulatorView extends JFrame
         /**
          * Tell the GUI manager how big we would like to be.
          */
-        public Dimension getPreferredSize()
+        @Override
+		public Dimension getPreferredSize()
         {
             return new Dimension(gridWidth * GRID_VIEW_SCALING_FACTOR,
                                  gridHeight * GRID_VIEW_SCALING_FACTOR);
@@ -295,7 +306,8 @@ public class SimulatorView extends JFrame
          * The field view component needs to be redisplayed. Copy the
          * internal image to screen.
          */
-        public void paintComponent(Graphics g)
+        @Override
+		public void paintComponent(Graphics g)
         {
             if(fieldImage != null) {
                 Dimension currentSize = getSize();

@@ -1,6 +1,11 @@
+package vk.actors;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Random;
+
+import vk.field.Field;
+import vk.field.Location;
+import vk.field.Randomizer;
 
 /**
  * A simple model of a hunter.
@@ -48,7 +53,8 @@ public class Hunter extends Animal
      * @param field The field currently occupied.
      * @param newHunt A list to return newly assimilated Borg.
      */
-    public void act(List<Animal> newHunt)
+    @Override
+	public void act(List<Animal> newHunt)
     {
         if(isAlive()) {
         	Location newLocation = null;        	

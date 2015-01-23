@@ -1,5 +1,11 @@
+package vk.actors;
+
 import java.util.List;
 import java.util.Random;
+
+import vk.field.Field;
+import vk.field.Location;
+import vk.field.Randomizer;
 
 /**
  * A simple model of a rabbit.
@@ -50,7 +56,8 @@ public class Rabbit extends Animal
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to return newly born rabbits.
      */
-    public void act(List<Animal> newRabbits)
+    @Override
+	public void act(List<Animal> newRabbits)
     {
         incrementAge();
         if(isAlive()) {

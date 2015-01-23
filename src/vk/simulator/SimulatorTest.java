@@ -1,3 +1,4 @@
+package vk.simulator;
 import static org.junit.Assert.*;
 
 import org.junit.Test;

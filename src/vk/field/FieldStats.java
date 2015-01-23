@@ -1,4 +1,4 @@
-import java.awt.Color;
+package vk.field;
 import java.util.HashMap;
 
 /**

@@ -1,3 +1,4 @@
+package vk.field;
 /**
  * Represent a location in a rectangular grid.
  * 
@@ -24,7 +25,8 @@ public class Location
     /**
      * Implement content equality.
      */
-    public boolean equals(Object obj)
+    @Override
+	public boolean equals(Object obj)
     {
         if(obj instanceof Location) {
             Location other = (Location) obj;
@@ -39,7 +41,8 @@ public class Location
      * Return a string of the form row,column
      * @return A string representation of the location.
      */
-    public String toString()
+    @Override
+	public String toString()
     {
         return row + "," + col;
     }
@@ -50,7 +53,8 @@ public class Location
      * unique hash code for each (row, col) pair.
      * @return A hashcode for the location.
      */
-    public int hashCode()
+    @Override
+	public int hashCode()
     {
         return (row << 16) + col;
     }

@@ -1,6 +1,11 @@
+package vk.actors;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Random;
+
+import vk.field.Field;
+import vk.field.Location;
+import vk.field.Randomizer;
 
 /**
  * A simple model of a borg.
@@ -52,7 +57,8 @@ public class Borg extends Animal
      * @param field The field currently occupied.
      * @param newBorg A list to return newly assimilated Borg.
      */
-    public void act(List<Animal> newBorg)
+    @Override
+	public void act(List<Animal> newBorg)
     {
         incrementAge();
         if(isAlive()) {

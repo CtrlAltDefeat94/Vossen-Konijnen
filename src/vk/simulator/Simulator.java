@@ -1,8 +1,18 @@
+package vk.simulator;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.Color;
+
+import vk.actors.Animal;
+import vk.actors.Borg;
+import vk.actors.Fox;
+import vk.actors.Hunter;
+import vk.actors.Rabbit;
+import vk.field.Field;
+import vk.field.Location;
+import vk.field.Randomizer;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field

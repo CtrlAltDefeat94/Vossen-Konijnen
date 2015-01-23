@@ -1,12 +1,18 @@
+package vk.actors;
+
 import java.util.List;
 import java.util.Iterator;
 import java.util.Random;
+
+import vk.field.Field;
+import vk.field.Location;
+import vk.field.Randomizer;
 
 /**
  * A simple model of a fox.
  * Foxes age, move, eat rabbits, and die.
  * 
- * @author David J. Barnes and Michael Kölling
+ * @author David J. Barnes and Michael Kösling
  * @version 2011.07.31
  */
 public class Fox extends Animal
@@ -61,7 +67,8 @@ public class Fox extends Animal
      * @param field The field currently occupied.
      * @param newFoxes A list to return newly born foxes.
      */
-    public void act(List<Animal> newFoxes)
+    @Override
+	public void act(List<Animal> newFoxes)
     {
         incrementAge();
         incrementHunger();

@@ -1,4 +1,9 @@
+package vk.actors;
+
 import java.util.List;
+
+import vk.field.Field;
+import vk.field.Location;
 
 /**
  * A class representing shared characteristics of animals.
@@ -39,7 +44,7 @@ public abstract class Animal
      * Check whether the animal is alive or not.
      * @return true if the animal is still alive.
      */
-    protected boolean isAlive()
+    public boolean isAlive()
     {
         return alive;
     }
@@ -48,7 +53,7 @@ public abstract class Animal
      * Indicate that the animal is no longer alive.
      * It is removed from the field.
      */
-    protected void setDead()
+    public void setDead()
     {
         alive = false;
         if(location != null) {

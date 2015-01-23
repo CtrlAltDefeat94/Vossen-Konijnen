@@ -1,3 +1,4 @@
+package vk.field;
 import java.util.Random;
 
 /**
