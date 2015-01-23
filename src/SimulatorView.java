@@ -159,6 +159,28 @@ public class SimulatorView extends JFrame
     		public void actionPerformed(ActionEvent e) { System.exit(0); }
     	});
     	menu.add(quit);
+    	menu = new JMenu("Views");
+    	menuBar.add(menu);
+    	JMenuItem histogram = new JMenuItem("Histogram");
+    	/*histogram.addActionListener(new ActionListener() {
+    		 This button doesnt work yet.
+    		}
+    	});*/
+    	menu.add(histogram);
+    	menuBar.add(menu);
+    	JMenuItem pieChart = new JMenuItem("Piechart");
+    	/*histogram.addActionListener(new ActionListener() {
+    		 This button doesnt work yet.
+    		}
+    	});*/
+    	menu.add(pieChart);
+    	menuBar.add(menu);
+    	JMenuItem thirdView = new JMenuItem("3rd view");
+    	/*histogram.addActionListener(new ActionListener() {
+    		 This button doesnt work yet.
+    		}
+    	});*/
+    	menu.add(thirdView);
     	return menuBar;
     }
     
