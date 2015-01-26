@@ -58,12 +58,8 @@ public class Hunter extends Animal implements Actor
     {
         if(isActive()) {
         	Location newLocation = null;
-            if(newLocation == null) { 
-                newLocation = getField().freeAdjacentLocation(getLocation());
-            }
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
+            newLocation = getField().freeAdjacentLocation(getLocation());
+            setLocation(newLocation);
         }
     }
 
