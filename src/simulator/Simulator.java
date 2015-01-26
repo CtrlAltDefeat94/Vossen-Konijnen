@@ -37,7 +37,7 @@ public class Simulator
     // The probability that a hunter will be created in any given grid position.
     private static final double HUNTER_CREATION_PROBABILITY = 0.003;
     // The maximum amount of hunters
-    private static final int MAX_HUNTERS = 25;
+    private static final int MAX_HUNTERS = 26;
 
     // List of animals in the field.
     private List<Actor> animals;
@@ -89,6 +89,10 @@ public class Simulator
     {
     	return step;
     }
+    public List<Actor> getAnimals()
+    {
+    	return animals;
+    }
     public SimulatorView getSimulatorView()
     {
     	return view;   
@@ -114,13 +118,6 @@ public class Simulator
             simulateOneStep();
         }
     }
-    
-    /**
-     * Run the simulation from its current state for a single step.
-     * Iterate over the whole field updating the state of each
-     * fox and rabbit.
-     */
-
     
     /**
      * Run the simulation from its current state for a single step.
@@ -184,7 +181,7 @@ public class Simulator
                     Borg borg = new Borg(true, field, location);
                     animals.add(borg);
                 }
-                else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY && hunterAmount <=MAX_HUNTERS) {
+                else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY && hunterAmount < MAX_HUNTERS) {
                     Location location = new Location(row, col);
                     Hunter hunter = new Hunter(true, field, location);
                     animals.add(hunter);
