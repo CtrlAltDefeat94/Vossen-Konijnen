@@ -57,12 +57,12 @@ public class Hunter extends Animal
 	public void act(List<Animal> newHunt)
     {
         if(isAlive()) {
-        	Location newLocation = null;        	
-        	Location locationVictim = hunt();
-    	    
-            if(locationVictim == null) { 
-                // No victim found -- move
-            	newLocation = getField().freeAdjacentLocation(getLocation());            		
+        	Location newLocation = null;
+            if(newLocation == null) { 
+                newLocation = getField().freeAdjacentLocation(getLocation());
+            }
+            if(newLocation != null) {
+                setLocation(newLocation);
             }
         }
     }
