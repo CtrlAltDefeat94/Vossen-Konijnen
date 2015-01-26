@@ -106,6 +106,20 @@ public class FieldStats
     }
     
     /**
+     * Get the number of individuals in the population of a given class.
+     * @return  An int with the number for this class.
+     */
+    public int getPopulationCount(Field field, Class key)
+    {
+        if(!countsValid) {
+            generateCounts(field);
+        }
+
+        Counter counter = counters.get(key);
+        return counter.getCount();
+    }
+    
+    /**
      * Generate counts of the number of foxes and rabbits.
      * These are not kept up to date as foxes and rabbits
      * are placed in the field, but only when a request

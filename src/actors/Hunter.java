@@ -14,7 +14,7 @@ import field.Randomizer;
  * @author Mathijs Lindeboom
  * @version 2015.01.22
  */
-public class Hunter extends Animal
+public class Hunter extends Animal implements Actor
 {
     // Characteristics shared by hunters (class variables).
     
@@ -54,9 +54,9 @@ public class Hunter extends Animal
      * @param newHunt A list to return newly assimilated Borg.
      */
     @Override
-	public void act(List<Animal> newHunt)
+	public void act(List<Actor> newHunt)
     {
-        if(isAlive()) {
+        if(isActive()) {
         	Location newLocation = null;
             if(newLocation == null) { 
                 newLocation = getField().freeAdjacentLocation(getLocation());
@@ -87,7 +87,7 @@ public class Hunter extends Animal
             Object animal = field.getObjectAt(where);
             if(animal instanceof Borg) {
                 Borg borg = (Borg) animal;
-                if(borg.isAlive()) { 
+                if(borg.isActive()) { 
                 	if (rand.nextInt(2) == 0)
             		{
                 		borg.setDead();
@@ -101,7 +101,7 @@ public class Hunter extends Animal
             }
             if (animal instanceof Fox) {
             	Fox fox = (Fox) animal;
-            	if(fox.isAlive()) {
+            	if(fox.isActive()) {
             		if (rand.nextInt(2) == 0)
             		{
             			fox.setDead();

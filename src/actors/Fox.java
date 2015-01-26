@@ -15,7 +15,7 @@ import field.Randomizer;
  * @author David J. Barnes and Michael Kösling
  * @version 2011.07.31
  */
-public class Fox extends Animal
+public class Fox extends Animal implements Actor
 {
     // Characteristics shared by all foxes (class variables).
     
@@ -68,11 +68,11 @@ public class Fox extends Animal
      * @param newFoxes A list to return newly born foxes.
      */
     @Override
-	public void act(List<Animal> newFoxes)
+	public void act(List<Actor> newFoxes)
     {
         incrementAge();
         incrementHunger();
-        if(isAlive()) {
+        if(isActive()) {
             giveBirth(newFoxes);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
@@ -128,7 +128,7 @@ public class Fox extends Animal
             Object animal = field.getObjectAt(where);
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()) { 
+                if(rabbit.isActive()) { 
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     return where;
@@ -136,7 +136,7 @@ public class Fox extends Animal
             }
             if (animal instanceof Borg) {
             	Borg borg = (Borg) animal;
-            	if(borg.isAlive()) {
+            	if(borg.isActive()) {
             		//if (rand.nextInt(2) == 0)
             		//{
             			borg.setDead();
@@ -154,7 +154,7 @@ public class Fox extends Animal
      * New births will be made into free adjacent locations.
      * @param newFoxes A list to return newly born foxes.
      */
-    private void giveBirth(List<Animal> newFoxes)
+    private void giveBirth(List<Actor> newFoxes)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.

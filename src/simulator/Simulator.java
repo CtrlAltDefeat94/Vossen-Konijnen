@@ -13,7 +13,7 @@ import actors.Rabbit;
 import field.Field;
 import field.Location;
 import field.Randomizer;
-
+import actors.Actor;
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
@@ -40,7 +40,7 @@ public class Simulator
     private static final int MAX_HUNTERS = 25;
 
     // List of animals in the field.
-    private List<Animal> animals;
+    private List<Actor> animals;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -70,7 +70,7 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
         
-        animals = new ArrayList<Animal>();
+        animals = new ArrayList<Actor>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
@@ -120,24 +120,29 @@ public class Simulator
      * Iterate over the whole field updating the state of each
      * fox and rabbit.
      */
+
+    
+    /**
+     * Run the simulation from its current state for a single step.
+     * Iterate over the whole field updating the state of each
+     * fox and rabbit.
+     */
     public void simulateOneStep()
     {
         step++;
-
-        // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<Animal>();        
-        // Let all rabbits act.
-        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
-            Animal animal = it.next();
-            animal.act(newAnimals);
-            if(! animal.isAlive()) {
+        
+        List<Actor> newActors = new ArrayList<Actor>();        
+        
+        for(Iterator<Actor> it = animals.iterator(); it.hasNext(); ) {
+            Actor actor = it.next();
+            actor.act(newActors);
+            if(! actor.isActive()) {
                 it.remove();
             }
         }
-               
+        
         // Add the newly born foxes and rabbits to the main lists.
-        animals.addAll(newAnimals);
-
+        animals.addAll(newActors);
         view.showStatus(step, field);
     }
         
