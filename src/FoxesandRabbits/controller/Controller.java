@@ -39,6 +39,14 @@ import FoxesandRabbits.runner.Simulator;
     		public void actionPerformed(ActionEvent e) { altViews.setVisibilityViews(); }
     	});
     	menu.add(views);
+    	
+    	menu = new JMenu("Settings");
+    	menuBar.add(menu);
+    	JMenuItem settings = new JMenuItem("Settings");
+    	settings.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent e) { Settings.setVisibilitySettings(); }
+    	});
+    	menu.add(settings);
     	return menuBar;
     }
     
