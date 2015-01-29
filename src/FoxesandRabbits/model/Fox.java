@@ -18,13 +18,13 @@ public class Fox extends Animal implements Actor
     // Characteristics shared by all foxes (class variables).
     
     // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 3;
+    private static int BREEDING_AGE = 3;
     // The age to which a fox can live.
     private static int MAX_AGE = 150;
     // The likelihood of a fox breeding.
     private static final double BREEDING_PROBABILITY = 0.1;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+    private static int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static int RABBIT_FOOD_VALUE = 8;
@@ -73,6 +73,22 @@ public class Fox extends Animal implements Actor
     public static void setRabbitFoodValue(int foodValue)
     {
     	RABBIT_FOOD_VALUE = foodValue;
+    }
+    public static int getBreedingAge()
+    {
+    	return BREEDING_AGE;
+    }
+    public static void setBreedingAge(int breedingAge)
+    {
+    	BREEDING_AGE = breedingAge;
+    }
+    public static int getLitterSize()
+    {
+    	return MAX_LITTER_SIZE;
+    }
+    public static void setLitterSize(int litter)
+    {
+    	MAX_LITTER_SIZE = litter;
     }
     /**
      * This is what the fox does most of the time: it hunts for

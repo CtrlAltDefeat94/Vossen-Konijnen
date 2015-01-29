@@ -101,7 +101,7 @@ public class Simulator extends JFrame
         Views altViews = new Views(this);
         Settings settings = new Settings();
         
-        controller = new Controller(this, altViews);
+        controller = new Controller(this, altViews, settings);
         setJMenuBar(controller.createMenu());        
 
         setTitle("Fox and Rabbit Simulation");

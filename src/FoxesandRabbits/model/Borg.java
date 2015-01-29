@@ -19,7 +19,9 @@ public class Borg extends Animal implements Actor
     // Characteristics shared by Borg (class variables).
     
     // The age to which a fox can live.
-    private static final int MAX_AGE = 100;
+    private static int MAX_AGE = 100;
+    // The Energy level the Borg Start with
+    private static int ENERGY_LEVEL = 10;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -46,10 +48,25 @@ public class Borg extends Animal implements Actor
         }
         else {
             age = 0;
-            energyLevel = 10;
+            energyLevel = ENERGY_LEVEL;
         }
     }
-    
+    public static int getAge()
+    {
+    	return MAX_AGE;
+    }
+    public static void setAge(int age)
+    {
+    	MAX_AGE = age;
+    }
+    public static int getEnergy()
+    {
+    	return ENERGY_LEVEL;
+    }
+    public static void setEnergy(int energy)
+    {
+    	ENERGY_LEVEL = energy;
+    }
     /**
      * This is what the Borg does most of the time: it hunts for
      * rabbits. In the process, it might assimilate, die of hunger,

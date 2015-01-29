@@ -18,15 +18,15 @@ public class Rabbit extends Animal implements Actor
     // Characteristics shared by all rabbits (class variables).
 
     // The age at which a rabbit can start to breed.
-    private static final int BREEDING_AGE = 13;
+    private static int BREEDING_AGE = 13;
     // The age to which a rabbit can live.
-    private static final int MAX_AGE = 40;
+    private static int MAX_AGE = 40;
     // The likelihood of a rabbit breeding.
     private static final double BREEDING_PROBABILITY = 0.19;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 6;
+    private static int MAX_LITTER_SIZE = 6;
  // number of steps a fox can go before it has to eat again.
-    private static final int GRASS_FOOD_VALUE = 8;
+    private static int GRASS_FOOD_VALUE = 8;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -51,6 +51,40 @@ public class Rabbit extends Animal implements Actor
             age = rand.nextInt(MAX_AGE);
         }
     }
+    
+    public static void setMaxAge(int age)
+    {
+    	MAX_AGE = age;
+    }
+    public static int getMaxAge()
+    {
+    	return MAX_AGE;
+    }
+    public static int getBreedingAge()
+    {
+    	return BREEDING_AGE;
+    }
+    public static void setBreedingAge(int breedingAge)
+    {
+    	BREEDING_AGE = breedingAge;
+    }
+    public static int getLitterSize()
+    {
+    	return MAX_LITTER_SIZE;
+    }
+    public static void setLitterSize(int litter)
+    {
+    	MAX_LITTER_SIZE = litter;
+    }
+    public static int getFoodValue()
+    {
+    	return GRASS_FOOD_VALUE;
+    }
+    public static void setFoodValue(int value)
+    {
+    	GRASS_FOOD_VALUE = value;
+    }
+  
     
     /**
      * This is what the rabbit does most of the time - it runs 

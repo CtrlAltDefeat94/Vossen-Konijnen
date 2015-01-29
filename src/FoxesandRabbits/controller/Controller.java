@@ -15,10 +15,12 @@ import FoxesandRabbits.runner.Simulator;
  {
     private Simulator simulator;
     private Views altViews;
-    public Controller(Simulator simulator, Views altViews)
+    private Settings settingsCreate;
+    public Controller(Simulator simulator, Views altViews, Settings settings)
     {
         this.simulator = simulator;
         this.altViews = altViews;
+        this.settingsCreate = settings;
     }      
      
     public JMenuBar createMenu()
@@ -44,7 +46,7 @@ import FoxesandRabbits.runner.Simulator;
     	menuBar.add(menu);
     	JMenuItem settings = new JMenuItem("Settings");
     	settings.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent e) { Settings.setVisibilitySettings(); }
+    		public void actionPerformed(ActionEvent e) { settingsCreate.setVisibilitySettings(); }
     	});
     	menu.add(settings);
     	return menuBar;
