@@ -1,5 +1,6 @@
 package FoxesandRabbits.model;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -9,7 +10,7 @@ import FoxesandRabbits.logic.*;
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
  * 
- * @author David J. Barnes and Michael KÃ¶lling
+ * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
 public class Rabbit extends Animal implements Actor
@@ -24,6 +25,8 @@ public class Rabbit extends Animal implements Actor
     private static final double BREEDING_PROBABILITY = 0.19;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 6;
+ // number of steps a fox can go before it has to eat again.
+    private static final int GRASS_FOOD_VALUE = 8;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -61,7 +64,11 @@ public class Rabbit extends Animal implements Actor
         if(isActive()) {
             giveBirth(newRabbits);            
             // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
+            Location newLocation = findFood();
+            if(newLocation == null) { 
+                // No food found - try to move to a free location.
+                newLocation = getField().freeAdjacentLocation(getLocation());
+            }
             if(newLocation != null) {
                 setLocation(newLocation);
             }
@@ -124,5 +131,29 @@ public class Rabbit extends Animal implements Actor
     private boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+    /**
+     * Look for rabbits adjacent to the current location.
+     * Only the first live rabbit is eaten.
+     * @return Where food was found, or null if it wasn't.
+     */
+    private Location findFood()
+    {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object animal = field.getObjectAt(where);
+            if(animal instanceof Grass) {
+                Grass grass = (Grass) animal;
+                if(grass.isActive()) { 
+                    grass.setDead();
+                    //foodLevel = GRASS_FOOD_VALUE;
+                    return where;
+                }
+            }
+        }
+        return null;
     }
 }

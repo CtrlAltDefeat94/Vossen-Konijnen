@@ -9,8 +9,8 @@ import FoxesandRabbits.logic.*;
  * A simple model of a grass.
  * Grass age, breed, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author Mathijs
+ * @version 29-01-2015
  */
 public class Grass extends Animal implements Actor
 {

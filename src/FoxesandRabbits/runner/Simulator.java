@@ -25,7 +25,7 @@ import FoxesandRabbits.model.Borg;
 import FoxesandRabbits.model.Fox;
 import FoxesandRabbits.model.Hunter;
 import FoxesandRabbits.model.Rabbit;
-import FoxesandRabbits.model.grass;
+import FoxesandRabbits.model.Grass;
 import FoxesandRabbits.view.AbstractView;
 import FoxesandRabbits.view.GraphView;
 import FoxesandRabbits.view.GridView;
@@ -53,7 +53,7 @@ public class Simulator extends JFrame
     // The probability that a hunter will be created in any given grid position.
     private static final double HUNTER_CREATION_PROBABILITY = 0.003;
     // The probability that a grass will be created in any given grid position.
-    private static final double GRASS_CREATION_PROBABILITY = 0.08;
+    private static final double GRASS_CREATION_PROBABILITY = 0.19;
     // The maximum amount of hunters
     private static final int MAX_HUNTERS = 25;
 
@@ -121,6 +121,7 @@ public class Simulator extends JFrame
         gridView.setColor(Fox.class, Color.BLUE);
         gridView.setColor(Borg.class, Color.BLACK);
         gridView.setColor(Hunter.class, Color.RED);
+        gridView.setColor(Grass.class, Color.GREEN);
         
         Container contents = getContentPane();
         contents.add(stepLabel, BorderLayout.NORTH);
@@ -250,6 +251,11 @@ public class Simulator extends JFrame
                     Location location = new Location(row, col);
                     Borg borg = new Borg(true, field, location);
                     animals.add(borg);
+                }
+                else if(rand.nextDouble() <= GRASS_CREATION_PROBABILITY) {
+                	Location location = new Location(row, col);
+                	Grass grass = new Grass(true, field, location);
+                	animals.add(grass);
                 }
                 else if(rand.nextDouble() <= HUNTER_CREATION_PROBABILITY && hunterAmount < MAX_HUNTERS) {
                     Location location = new Location(row, col);
