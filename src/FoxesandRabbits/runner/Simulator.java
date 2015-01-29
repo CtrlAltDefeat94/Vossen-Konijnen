@@ -2,6 +2,7 @@ package FoxesandRabbits.runner;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import FoxesandRabbits.controller.AltViewsButton;
 import FoxesandRabbits.controller.Controller;
 import FoxesandRabbits.logic.Field;
 import FoxesandRabbits.logic.FieldStats;
@@ -23,7 +25,9 @@ import FoxesandRabbits.model.Fox;
 import FoxesandRabbits.model.Hunter;
 import FoxesandRabbits.model.Rabbit;
 import FoxesandRabbits.view.AbstractView;
+import FoxesandRabbits.view.GraphView;
 import FoxesandRabbits.view.GridView;
+import FoxesandRabbits.view.PieChart;
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
@@ -55,8 +59,6 @@ public class Simulator extends JFrame
     private Field field;
     // The current step of the simulation.
     private int step;
-    // A graphical view of the simulation.
-    private AbstractView gridView;
     //
     private FieldStats stats;
 
@@ -92,7 +94,8 @@ public class Simulator extends JFrame
             width = DEFAULT_WIDTH;
         }
         views = new ArrayList<AbstractView>();
-        controller = new Controller(this);
+        AltViewsButton altViews = new AltViewsButton(this);
+        controller = new Controller(this, altViews);
         setJMenuBar(controller.createMenu());        
 
         setTitle("Fox and Rabbit Simulation");
@@ -107,16 +110,15 @@ public class Simulator extends JFrame
         stats = new FieldStats();
 
         // Create a view of the state of each location in the field.
-        gridView = new GridView(depth, width, this, stats);
-        ((GridView)gridView).setColor(Rabbit.class, Color.ORANGE);
-        ((GridView)gridView).setColor(Fox.class, Color.BLUE);
-        ((GridView)gridView).setColor(Borg.class, Color.BLACK);
-        ((GridView)gridView).setColor(Hunter.class, Color.RED);
+        GridView gridView = new GridView(depth, width, this, stats);
+        gridView.setColor(Rabbit.class, Color.ORANGE);
+        gridView.setColor(Fox.class, Color.BLUE);
+        gridView.setColor(Borg.class, Color.BLACK);
+        gridView.setColor(Hunter.class, Color.RED);
         
         Container contents = getContentPane();
         contents.add(stepLabel, BorderLayout.NORTH);
-        
-        contents.add(((GridView)gridView).getFieldView(), BorderLayout.CENTER);
+        contents.add(gridView.getFieldView(), BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
         contents.add(leftMenu, BorderLayout.WEST);
         
@@ -138,10 +140,6 @@ public class Simulator extends JFrame
     public List<Actor> getAnimals()
     {
     	return animals;
-    }
-    public GridView getGridView()
-    {
-    	return ((GridView)gridView);   
     }
     public JLabel getPopulation()
     {
@@ -180,7 +178,7 @@ public class Simulator extends JFrame
      */
     public void simulate(int numSteps)
     {
-        for(int step = 1; step <= numSteps && ((GridView)gridView).isViable(field); step++) {
+        for(int step = 1; step <= numSteps && isViable(field); step++) {
             simulateOneStep();
         }
     }
@@ -219,7 +217,7 @@ public class Simulator extends JFrame
         populate();
         
         // Show the starting state in the view.
-        gridView.showStatus(step, field, stats);
+        notifyViews();
     }
     
     /**
@@ -256,5 +254,9 @@ public class Simulator extends JFrame
                 // else leave the location empty.
             }
         }
+    }
+    public boolean isViable(Field field)
+    {
+        return stats.isViable(field);
     }
 }
