@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import FoxesandRabbits.controller.AltViewsButton;
 import FoxesandRabbits.controller.Controller;
+import FoxesandRabbits.controller.Views;
 import FoxesandRabbits.logic.Field;
 import FoxesandRabbits.logic.FieldStats;
 import FoxesandRabbits.logic.Location;
@@ -94,7 +94,7 @@ public class Simulator extends JFrame
             width = DEFAULT_WIDTH;
         }
         views = new ArrayList<AbstractView>();
-        AltViewsButton altViews = new AltViewsButton(this);
+        Views altViews = new Views(this);
         controller = new Controller(this, altViews);
         setJMenuBar(controller.createMenu());        
 
@@ -103,7 +103,7 @@ public class Simulator extends JFrame
         population = new JLabel(POPULATION_PREFIX, SwingConstants.CENTER);
         JPanel leftMenu = controller.createButtons();
         
-        setLocation(100, 50);
+        //setLocation(100, 50);
         
         animals = new ArrayList<Actor>();
         field = new Field(depth, width);

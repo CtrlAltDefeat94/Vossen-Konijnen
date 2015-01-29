@@ -198,6 +198,7 @@ public class GridView extends AbstractView
         @Override
 		public void paintComponent(Graphics g)
         {
+        	super.paintComponent(g);
             if(fieldImage != null) {
                 Dimension currentSize = getSize();
                 if(size.equals(currentSize)) {

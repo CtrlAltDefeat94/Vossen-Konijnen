@@ -209,14 +209,6 @@ public class GraphView extends AbstractView {
         }
 
         /**
-         * This component is opaque.
-         */
-        public boolean isOpaque()
-        {
-            return true;
-        }
-
-        /**
          * This component needs to be redisplayed. Copy the internal image 
          * to screen. (This method gets called by the Swing screen painter 
          * every time it want this component displayed.)
@@ -225,6 +217,7 @@ public class GraphView extends AbstractView {
          */
         public void paintComponent(Graphics g)
         {
+        	super.paintComponent(g);
             Dimension size = getSize();
             //g.clearRect(0, 0, size.width, size.height);
             if(graphImage != null) {

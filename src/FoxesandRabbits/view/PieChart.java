@@ -17,7 +17,7 @@ import FoxesandRabbits.logic.FieldStats;
 import FoxesandRabbits.runner.Simulator;
 public class PieChart extends AbstractView {
 
-	private static PiePanel pie;
+	private static PieChartPanel pie;
 	
 	// The classes being tracked by this view
     private Set<Class> classes;
@@ -28,7 +28,7 @@ public class PieChart extends AbstractView {
 		super(simulator);
 		classes = new HashSet<Class>();
 		colors = new HashMap<Class, Color>();
-        pie = new PiePanel(width, height);
+        pie = new PieChartPanel(width, height);
         pie.newRun();
         add(pie);
 	}
@@ -43,7 +43,7 @@ public class PieChart extends AbstractView {
         classes = colors.keySet();		
 	}
 	
-	class PiePanel extends JPanel
+	class PieChartPanel extends JPanel
     {
         // An internal image buffer that is used for painting. For
         // actual display, this image buffer is then copied to screen.
@@ -52,19 +52,10 @@ public class PieChart extends AbstractView {
 		/**
          * Create a new, empty GraphPanel.
          */
-        public PiePanel(int width, int height)
+        public PieChartPanel(int width, int height)
         {
             pieImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             clearImage();
-        }
-        
-        /**
-         * Indicate a new simulator run on this panel.
-         */
-        public void newRun()
-        {
-            clearImage();
-            repaint();
         }
         
         /**
@@ -114,6 +105,15 @@ public class PieChart extends AbstractView {
         {
             paintImmediately(0, 0, pieImage.getWidth(), pieImage.getHeight());
         }
+        
+        /**
+         * Indicate a new simulator run on this panel.
+         */
+        public void newRun()
+        {
+            clearImage();
+            repaint();
+        }
 
         /**
          * Clear the image on this panel.
@@ -125,28 +125,13 @@ public class PieChart extends AbstractView {
             g.fillRect(0, 0, pieImage.getWidth(), pieImage.getHeight());
             repaint();
         }
-
-        // The following methods are redefinitions of methods
-        // inherited from superclasses.
-
+        
         /**
-         * Tell the layout manager how big we would like to be.
-         * (This method gets called by layout managers for placing
-         * the components.)
-         * 
-         * @return The preferred dimension for this component.
-         */
+        * @return The preferred dimension for this component.
+        */
         public Dimension getPreferredSize()
         {
             return new Dimension(pieImage.getWidth(), pieImage.getHeight());
-        }
-
-        /**
-         * This component is opaque.
-         */
-        public boolean isOpaque()
-        {
-            return true;
         }
 		
         /**
@@ -157,6 +142,7 @@ public class PieChart extends AbstractView {
          * @param g The graphics context that can be used to draw on this component.
          */
 		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
 			Dimension size = getSize();
             if(pieImage != null) {
                 g.drawImage(pieImage, 0, 0, null);

@@ -14,8 +14,8 @@ import FoxesandRabbits.runner.Simulator;
  public class Controller
  {
     private Simulator simulator;
-    private AltViewsButton altViews;
-    public Controller(Simulator simulator, AltViewsButton altViews)
+    private Views altViews;
+    public Controller(Simulator simulator, Views altViews)
     {
         this.simulator = simulator;
         this.altViews = altViews;
