@@ -1,11 +1,13 @@
 package FoxesandRabbits.view;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
-import FoxesandRabbits.controller.Controller;
 import FoxesandRabbits.logic.Field;
 import FoxesandRabbits.logic.FieldStats;
 import FoxesandRabbits.runner.Simulator;

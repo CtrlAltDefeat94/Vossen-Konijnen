@@ -94,18 +94,9 @@ public class PieChart extends AbstractView {
                 	previous += newArc;
                 }
                 
-                repaintNow();
+                repaint();
             }
         }
-
-        /**
-         * Cause immediate update of the panel.
-         */
-        public void repaintNow()
-        {
-            paintImmediately(0, 0, pieImage.getWidth(), pieImage.getHeight());
-        }
-        
         /**
          * Indicate a new simulator run on this panel.
          */

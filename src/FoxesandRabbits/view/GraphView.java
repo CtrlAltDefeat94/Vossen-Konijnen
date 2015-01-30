@@ -138,7 +138,7 @@ public class GraphView extends AbstractView {
                     g.drawLine(width-3, lastVal.get(class1), width-2, y);
                     lastVal.put(class1, y);
                 }
-                repaintNow();
+                repaint();
             }
         }
 
@@ -172,14 +172,6 @@ public class GraphView extends AbstractView {
             }
 
             repaint();
-        }
-
-        /**
-         * Cause immediate update of the panel.
-         */
-        public void repaintNow()
-        {
-            paintImmediately(0, 0, graphImage.getWidth(), graphImage.getHeight());
         }
 
         /**
