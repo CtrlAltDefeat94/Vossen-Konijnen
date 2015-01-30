@@ -13,7 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import FoxesandRabbits.controller.Controller;
+import FoxesandRabbits.controller.LeftMenu;
+import FoxesandRabbits.controller.MenuBar;
 import FoxesandRabbits.controller.Settings;
 import FoxesandRabbits.controller.Views;
 import FoxesandRabbits.logic.Field;
@@ -65,8 +66,9 @@ public class Simulator extends JFrame
     private int step;
     //
     private FieldStats stats;
-
-    private Controller controller;
+    
+    private MenuBar menuBar;
+    private LeftMenu leftMenu;
     
     
 
@@ -101,13 +103,13 @@ public class Simulator extends JFrame
         Views altViews = new Views(this);
         Settings settings = new Settings();
         
-        controller = new Controller(this, altViews, settings, step);
-        setJMenuBar(controller.createMenu());        
+        menuBar = new MenuBar(altViews, settings);
+        setJMenuBar(menuBar.createMenu());   
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, SwingConstants.CENTER);
         population = new JLabel(POPULATION_PREFIX, SwingConstants.CENTER);
-        JPanel leftMenu = controller.createButtons();
+        JPanel leftMenu = new LeftMenu(this, step).createButtons();
         
         //setLocation(100, 50);
         
