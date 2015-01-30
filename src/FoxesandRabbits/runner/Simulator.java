@@ -22,6 +22,7 @@ import FoxesandRabbits.logic.FieldStats;
 import FoxesandRabbits.logic.Location;
 import FoxesandRabbits.logic.Randomizer;
 import FoxesandRabbits.model.Actor;
+import FoxesandRabbits.model.Alpaca;
 import FoxesandRabbits.model.Borg;
 import FoxesandRabbits.model.Fox;
 import FoxesandRabbits.model.Hunter;
@@ -124,6 +125,7 @@ public class Simulator extends JFrame
         gridView.setColor(Borg.class, Color.BLACK);
         gridView.setColor(Hunter.class, Color.RED);
         gridView.setColor(Grass.class, Color.GREEN);
+        gridView.setColor(Alpaca.class, Color.PINK);
         
         Container contents = getContentPane();
         contents.add(stepLabel, BorderLayout.NORTH);
@@ -272,5 +274,22 @@ public class Simulator extends JFrame
     public boolean isViable(Field field)
     {
         return stats.isViable(field);
+    }
+    public void alpacalypse()
+    {
+        Random rand = Randomizer.getRandom();
+        int amountAlpacasAtStart = rand.nextInt(20);
+        int alpacaCount = 0;
+        field.clear();
+        for(int row = 0; row < field.getDepth(); row++) {
+            for(int col = 0; col < field.getWidth(); col++) {
+                if(alpacaCount <= amountAlpacasAtStart) {
+                    Location location = new Location(row, col);
+                    Alpaca alpaca = new Alpaca(true, field, location);
+                    animals.add(alpaca);
+                    alpacaCount++;
+                }
+            }
+        }
     }
 }

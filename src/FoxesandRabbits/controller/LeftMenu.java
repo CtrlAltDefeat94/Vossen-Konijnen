@@ -76,6 +76,15 @@ public class LeftMenu {
 			}
 		});
 		leftMenu.add(resetButton);
+		
+		JButton alpacalypseButton = new JButton("ALPACAlypse");
+		alpacalypseButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				simulator.alpacalypse();
+			}
+		});
+		leftMenu.add(alpacalypseButton);
         return leftMenu;
     }
     
