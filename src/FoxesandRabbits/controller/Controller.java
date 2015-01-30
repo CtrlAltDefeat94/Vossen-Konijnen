@@ -9,6 +9,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import FoxesandRabbits.runner.DynamicThread;
 import FoxesandRabbits.runner.Simulator;
 
  public class Controller
@@ -16,11 +17,13 @@ import FoxesandRabbits.runner.Simulator;
     private Simulator simulator;
     private Views altViews;
     private Settings settingsCreate;
-    public Controller(Simulator simulator, Views altViews, Settings settings)
+    private int step;
+    public Controller(Simulator simulator, Views altViews, Settings settings, int steps)
     {
         this.simulator = simulator;
         this.altViews = altViews;
         this.settingsCreate = settings;
+        step = steps;
     }      
      
     public JMenuBar createMenu()
@@ -57,6 +60,13 @@ import FoxesandRabbits.runner.Simulator;
     	JPanel leftMenu = new JPanel();
 		leftMenu.setLayout(new GridLayout(0, 1));
         
+        JButton pauseButton = new JButton("Pause");
+        pauseButton.addActionListener(new ActionListener() {
+                           @Override
+						public void actionPerformed(ActionEvent e) { DynamicThread.pause(); }
+                       });
+        leftMenu.add(pauseButton);
+        
         JButton oneStepButton = new JButton("One Step");
         oneStepButton.addActionListener(new ActionListener() {
                            @Override
@@ -64,24 +74,34 @@ import FoxesandRabbits.runner.Simulator;
                        });
         leftMenu.add(oneStepButton);
         
-        JButton hundredStepButton = new JButton("Hundred Step");
-        hundredStepButton.addActionListener(new ActionListener() {
+        JButton startButton = new JButton("Start");
+        startButton.addActionListener(new ActionListener() {
                            @Override
 						public void actionPerformed(ActionEvent e) {
-                        	    
-                        	    disableButton(hundredStepButton);
-                        	    Thread thread = new Thread(new Runnable(){
+                        	   DynamicThread thread1 = new DynamicThread("thread1", simulator);
+                       }});
+        leftMenu.add(startButton);
+        
+        JButton hundredButton = new JButton("Hundred Step");
+        hundredButton.addActionListener(new ActionListener() {
+        	@Override
+        	   public void actionPerformed(ActionEvent arg0) {
+        	    
+        	    //disableButton(hundredButton);
+        	    
+        	    Thread thread = new Thread(new Runnable(){
 
-                        	     @Override
-                        	     public void run() {
-                        	      simulator.simulate(100);
-                                  enableButton(hundredStepButton);
-                        	     }
-                        	     
-                        	    });
-                        	    thread.start();}
-                       });
-        leftMenu.add(hundredStepButton);
+        	     @Override
+        	     public void run() {
+        	      simulator.simulate(100);
+        	      //enableButton(hundredButton);
+        	     }
+        	     
+        	    });
+        	    thread.start();
+        	}});
+                           
+        leftMenu.add(hundredButton);
         
         JButton resetButton = new JButton("Reset");
 		resetButton.addActionListener(new ActionListener() {
