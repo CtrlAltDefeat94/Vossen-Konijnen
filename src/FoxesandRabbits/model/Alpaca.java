@@ -17,13 +17,13 @@ public class Alpaca extends Animal implements Actor
     // Characteristics shared by hunters (class variables).
     
 	// The age at which a rabbit can start to breed.
-    private static int BREEDING_AGE = 13;
+    private static int BREEDING_AGE = 6;
     // The age to which a hunter can live.
-    private static final int MAX_AGE = 100;
+    private static final int MAX_AGE = 300;
     // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.19;
+    private static final double BREEDING_PROBABILITY = 1;
     // The maximum number of births.
-    private static int MAX_LITTER_SIZE = 6;
+    private static int MAX_LITTER_SIZE = 590;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -58,9 +58,10 @@ public class Alpaca extends Animal implements Actor
      * @param newHunt A list to return newly assimilated Borg.
      */
     @Override
-	public void act(List<Actor> newHunt)
+	public void act(List<Actor> newAlpaca)
     {
         if(isActive()) {
+        	giveBirth(newAlpaca); 
         	Location newLocation = null;
             if(newLocation == null) { 
                 newLocation = getField().freeAdjacentLocation(getLocation());
@@ -71,19 +72,7 @@ public class Alpaca extends Animal implements Actor
         }
     }
 
-    private void giveBirth(List<Actor> newRabbits)
-    {
-        // New rabbits are born into adjacent locations.
-        // Get a list of adjacent free locations.
-        Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            Rabbit young = new Rabbit(false, field, loc);
-            newRabbits.add(young);
-        }
-    }
+   
         
     /**
      * Generate a number representing the number of births,
@@ -111,6 +100,19 @@ public class Alpaca extends Animal implements Actor
     private boolean canBreed()
     {
         return age >= BREEDING_AGE;
+    }
+    private void giveBirth(List<Actor> newAlpaca)
+    {
+        // New rabbits are born into adjacent locations.
+        // Get a list of adjacent free locations.
+        Field field = getField();
+        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        int births = breed();
+        for(int b = 0; b < births && free.size() > 0; b++) {
+            Location loc = free.remove(0);
+            Alpaca young = new Alpaca(false, field, loc);
+            newAlpaca.add(young);
+        }
     }
 
     
@@ -183,7 +185,20 @@ public class Alpaca extends Animal implements Actor
             		          		
             	}
             }
-            
+            // If the next location is grass, it will be crushed
+            if (animal instanceof Grass) {
+            	Grass grass = (Grass) animal;
+            	if (rand.nextInt(1) == 0)
+        		{
+        			grass.setDead();
+            		return where;              			
+        		}
+        		else {
+        			return null;
+        		}
+            		
+            		          		
+            }
         }
         return null;
     }
