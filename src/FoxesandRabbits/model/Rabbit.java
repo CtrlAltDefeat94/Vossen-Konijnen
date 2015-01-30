@@ -34,6 +34,8 @@ public class Rabbit extends Animal implements Actor
     
     // The rabbit's age.
     private int age;
+    // The rabbit's foodlevel
+    private int foodlevel;
 
     /**
      * Create a new rabbit. A rabbit may be created with age
@@ -50,6 +52,7 @@ public class Rabbit extends Animal implements Actor
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
+        foodlevel = (GRASS_FOOD_VALUE / 2 + 3);
     }
     
     public static void setMaxAge(int age)
@@ -94,6 +97,7 @@ public class Rabbit extends Animal implements Actor
     @Override
 	public void act(List<Actor> newRabbits)
     {
+    	foodlevel--;
         incrementAge();
         if(isActive()) {
             giveBirth(newRabbits);            
@@ -151,9 +155,23 @@ public class Rabbit extends Animal implements Actor
      */
     private int breed()
     {
+    	double breedingProbability;
+    	int maxLitterSize;
+    	if (foodlevel > (GRASS_FOOD_VALUE / 2) + 2) {
+    		breedingProbability = BREEDING_PROBABILITY * 2;
+    		maxLitterSize = MAX_LITTER_SIZE + 3;
+    	}
+    	else if (foodlevel <= ((GRASS_FOOD_VALUE / 2) + 2) && foodlevel > (GRASS_FOOD_VALUE / 2 - 2)){
+    		breedingProbability = BREEDING_PROBABILITY;
+    		maxLitterSize = MAX_LITTER_SIZE;
+    	}    	
+    	else {
+    		breedingProbability = BREEDING_PROBABILITY / 2;
+    		maxLitterSize = MAX_LITTER_SIZE - 3;
+    	}
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+        if(canBreed() && rand.nextDouble() <= breedingProbability) {
+            births = rand.nextInt(maxLitterSize) + 1;
         }
         return births;
     }
@@ -172,7 +190,7 @@ public class Rabbit extends Animal implements Actor
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood()
-    {
+    {    	
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
@@ -183,7 +201,7 @@ public class Rabbit extends Animal implements Actor
                 Grass grass = (Grass) animal;
                 if(grass.isActive()) { 
                     grass.setDead();
-                    //foodLevel = GRASS_FOOD_VALUE;
+                    foodlevel = GRASS_FOOD_VALUE;
                     return where;
                 }
             }

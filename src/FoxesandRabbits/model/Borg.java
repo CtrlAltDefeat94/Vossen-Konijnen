@@ -168,6 +168,11 @@ public class Borg extends Animal implements Actor
             		          		
             	}
             }
+            if (animal instanceof Grass) {
+            	Grass grass = (Grass) animal;
+            	grass.setDead();
+            	return null;
+            }
         }
         return null;
     }

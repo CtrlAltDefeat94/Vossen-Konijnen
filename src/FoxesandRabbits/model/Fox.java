@@ -175,6 +175,13 @@ public class Fox extends Animal implements Actor
             		//}
             	}
             }
+            if (animal instanceof Grass) {
+            	Grass grass = (Grass) animal;
+            	if(grass.isActive()) {
+            		grass.setDead();
+            		return where;
+            	}
+            }
         }
         return null;
     }

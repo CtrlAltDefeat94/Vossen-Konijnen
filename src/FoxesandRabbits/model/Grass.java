@@ -14,10 +14,8 @@ import FoxesandRabbits.logic.*;
  */
 public class Grass extends Animal implements Actor
 {
-    // Characteristics shared by all grasss (class variables).
-
-    // The age at which a grass can start to breed.
-    private static final int BREEDING_AGE = 3;
+    // Characteristics shared by all grass (class variables).
+	
     // The age to which a grass can live.
     private static final int MAX_AGE = 12;
     // The likelihood of a grass breeding.
@@ -57,33 +55,19 @@ public class Grass extends Animal implements Actor
     @Override
 	public void act(List<Actor> newGrass)
     {
-        incrementAge();
         if(isActive()) {
-            giveBirth(newGrass);            
-           
+        	giveBirth(newGrass);           
+        	
         }
     }
-
-    /**
-     * Increase the age.
-     * This could result in the grass's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
-    
     /**
      * Check whether or not this grass is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newGrass A list to return newly born grasss.
+     * @param newGrass A list to return newly born grass.
      */
     private void giveBirth(List<Actor> newGrass)
     {
-        // New grasss are born into adjacent locations.
+        // New grass are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
@@ -103,18 +87,9 @@ public class Grass extends Animal implements Actor
     private int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if(rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
-    }
-
-    /**
-     * A grass can breed if it has reached the breeding age.
-     * @return true if the grass can breed, false otherwise.
-     */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
     }
 }

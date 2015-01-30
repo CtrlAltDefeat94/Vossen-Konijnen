@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.Random;
 
-import FoxesandRabbits.logic.*;
+import FoxesandRabbits.logic.*;	
 
 /**
  * A simple model of a hunter.
