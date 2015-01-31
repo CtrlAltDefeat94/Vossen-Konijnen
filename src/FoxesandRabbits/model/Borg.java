@@ -94,6 +94,7 @@ public class Borg extends Animal implements Actor
     {
         incrementAge();
         if(isActive()) {
+        	ebola();
         	Location newLocation = null;        	
         	if (energyLevel >= 1)
         	{

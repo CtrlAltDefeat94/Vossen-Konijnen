@@ -35,7 +35,7 @@ public class LeftMenu {
         JButton oneStepButton = new JButton("One Step");
         oneStepButton.addActionListener(new ActionListener() {
                            @Override
-						public void actionPerformed(ActionEvent e) { simulator.simulate(1); }
+						public void actionPerformed(ActionEvent e) { DynamicThread.pause(); simulator.simulate(1); }
                        });
         leftMenu.add(oneStepButton);
         
@@ -53,13 +53,14 @@ public class LeftMenu {
         	   public void actionPerformed(ActionEvent arg0) {
         	    
         	    //disableButton(hundredButton);
+
+   	    	     DynamicThread.pause();
         	    
         	    Thread thread = new Thread(new Runnable(){
 
         	     @Override
         	     public void run() {
         	      simulator.simulate(100);
-        	      //enableButton(hundredButton);
         	     }
         	     
         	    });

@@ -44,7 +44,7 @@ public class Rabbit extends Animal implements Actor
     private int diseaseCount;
     // Rabbits who can have the disease
     private boolean sensitiveForDisease;
-    // % rabbits that can get the disease
+    // % rabbits that are immume to the disease
     private int percentageDisease = 10;
         
     // generate a random number between min and max 
@@ -92,7 +92,7 @@ public class Rabbit extends Animal implements Actor
     private void findRabbitDisease()
     {
     	if (diseaseOn == true & disease == true)
-    	{    		  		
+    	{
     		Field field = getField();
     		List<Location> adjacent = field.adjacentLocations(getLocation());
     		Iterator<Location> it = adjacent.iterator();
