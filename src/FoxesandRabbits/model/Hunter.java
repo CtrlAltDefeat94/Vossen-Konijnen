@@ -42,6 +42,7 @@ public class Hunter extends Animal implements Actor
         else {
             age = 0;
         }
+        infected = true;
     }
     
     /**
@@ -56,6 +57,7 @@ public class Hunter extends Animal implements Actor
     {
         if(isActive()) {
         	Location newLocation = hunt();
+        	ebola();
             if(newLocation == null) { 
                 newLocation = getField().freeAdjacentLocation(getLocation());
             }

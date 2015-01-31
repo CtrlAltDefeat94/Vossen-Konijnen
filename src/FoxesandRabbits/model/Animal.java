@@ -1,5 +1,6 @@
 package FoxesandRabbits.model;
 
+import java.util.Iterator;
 import java.util.List;
 
 import FoxesandRabbits.logic.*;
@@ -18,6 +19,13 @@ public abstract class Animal
     protected Field field;
     // The animal's position in the field.
     protected Location location;
+    
+    // set Ebola to false (off)
+    protected static boolean ebola = false;
+    // Set ebolacount to 0
+    protected int ebolaCount = 0;
+    // Animal is infected or not.
+    protected boolean infected;
     
     /**
      * Create a new animal at location in field.
@@ -93,4 +101,111 @@ public abstract class Animal
         return field;
     }
     
+    /**
+     * Methode to set infected to true
+     */
+    protected void setInfected()
+    {
+    	infected = true;
+    }
+    
+    /**
+     * Count how many the actor has infected. 
+     * @return true if actor has infected 10 or more other actors
+     * @return false if actor not infected 10 or more other actors
+     */
+    protected boolean ebolaCount()
+    {
+    	if (ebolaCount >= 10)
+    	{return true;}
+    	else
+    	{ebolaCount++;
+    	return false;
+    	}
+    }
+    
+    /**
+     * Methode to set ebola to true.
+     */
+    public static void EbolaOn()
+    {
+    	ebola = true;
+    }
+    
+    /**
+     * Methode to set ebola to false 
+     */
+    public static void EbolaOff()
+    {
+    	ebola = false;
+    }
+    
+    /**
+     * Methode to infect other actors.
+     * If ebola = true & infected = true
+     * than ~ Actors who come in contact with other actors will infect them.
+     * and kills them if ebolaCount = true
+     */
+    protected void ebola()
+    {
+    	if (ebola == true && infected == true)
+    	{    		  		
+    		Field field = getField();
+    		List<Location> adjacent = field.adjacentLocations(getLocation());
+    		Iterator<Location> it = adjacent.iterator();
+    		
+    		    		
+    		while(it.hasNext())
+    		{
+    			Location where = it.next();
+    			Object animal = field.getObjectAt(where);
+    			if(animal instanceof Rabbit){
+    				Rabbit rabbit = (Rabbit) animal;
+    				if(rabbit.isActive())
+    				{   
+    					rabbit.setInfected();
+    					
+    					if (ebolaCount() == true)
+    					{rabbit.setDead();
+    					 }  			
+    					rabbit.ebolaCount();
+		    		}
+    			}
+    			if (animal instanceof Borg){
+    				Borg borg = (Borg) animal;
+    				if(borg.isActive())
+    				{
+    					borg.setInfected();
+    					if (ebolaCount() == true)
+    					{borg.setDead();
+    					}  	
+    					borg.ebolaCount();
+    				}
+    			}
+    			if (animal instanceof Fox){
+    				Fox fox = (Fox) animal;
+    				if(fox.isActive())
+    				{
+    					fox.setInfected();
+    					if (ebolaCount() == true)
+    					{fox.setDead();
+    					}  	
+    					fox.ebolaCount();
+    				}
+    			}
+    			if (animal instanceof Hunter){
+    				Hunter hunter = (Hunter) animal;
+    				if(hunter.isActive())
+    				{
+    					hunter.setInfected();
+    					if (ebolaCount() == true)
+    					{hunter.setDead();
+    					}  
+    					hunter.ebolaCount();
+    				}
+    			}    			
+    		}    		
+    	}
+    }
+
 }

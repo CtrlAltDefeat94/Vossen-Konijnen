@@ -85,6 +85,30 @@ public class LeftMenu {
 			}
 		});
 		leftMenu.add(alpacalypseButton);
+				
+		JButton DiseaseButton = new JButton("Myxomatosis");
+		DiseaseButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Simulator.DiseaseButton();
+			}
+		});
+		
+		leftMenu.add(DiseaseButton);
+		
+		JButton EbolaButton = new JButton("Ebola!!!");
+		EbolaButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Simulator.EbolaButton();
+			}
+		});
+		
+		leftMenu.add(EbolaButton);
+		leftMenu.add(resetButton);
+		
+		
+		
         return leftMenu;
     }
     
