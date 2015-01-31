@@ -55,7 +55,7 @@ public class Hunter extends Animal implements Actor
 	public void act(List<Actor> newHunt)
     {
         if(isActive()) {
-        	Location newLocation = null;
+        	Location newLocation = hunt();
             if(newLocation == null) { 
                 newLocation = getField().freeAdjacentLocation(getLocation());
             }

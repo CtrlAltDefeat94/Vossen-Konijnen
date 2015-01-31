@@ -62,7 +62,7 @@ public class Alpaca extends Animal implements Actor
     {
         if(isActive()) {
         	giveBirth(newAlpaca); 
-        	Location newLocation = null;
+        	Location newLocation = hunt();
             if(newLocation == null) { 
                 newLocation = getField().freeAdjacentLocation(getLocation());
             }
