@@ -8,7 +8,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-
+/**
+ * class to create and control the menubar.
+ * @author Daniël Slobben and Tobias Schlichter
+ *
+ */
 public class MenuBar {
 
     private Views altViews;

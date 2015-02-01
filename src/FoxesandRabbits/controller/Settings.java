@@ -10,6 +10,10 @@ import FoxesandRabbits.model.Borg;
 import FoxesandRabbits.model.Fox;
 import FoxesandRabbits.model.Rabbit;
 
+/**
+ * class designed to create and control the settings frame
+ * @author Daniël Slobben *
+ */
 public class Settings {
 	private JFrame frame;
 	
@@ -20,6 +24,10 @@ public class Settings {
 		frame.setVisible(false);
 	}
 	
+	/**
+	 * the method to create the JTabbedPane
+	 * @return the JTabbedPane that was created
+	 */
 	private JTabbedPane createWindow()
 	{
 		JTabbedPane tabbedPane = new JTabbedPane();
@@ -193,14 +201,12 @@ public class Settings {
 //----------------------------------------------------------------------------------------------		
 		return tabbedPane;
 	}
-
+    /**
+     * method to set the visibility of the frame
+     */
 	public void setVisibilitySettings() {
 		frame.setVisible(true);	
 		
-	}
-	public JFrame returnFrame()
-	{
-		return frame;
 	}
 	
 

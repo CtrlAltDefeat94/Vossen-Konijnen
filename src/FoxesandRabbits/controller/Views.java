@@ -13,6 +13,11 @@ import FoxesandRabbits.runner.Simulator;
 import FoxesandRabbits.view.GraphView;
 import FoxesandRabbits.view.PieChart;
 
+/**
+ * the class to create the views frame
+ * @author Daniël Slobben
+ *
+ */
 public class Views {
 	JFrame frame;
 	Simulator simulator;
@@ -51,6 +56,9 @@ public class Views {
 		
 		return panel;
 	}
+	/**
+	 * method to set the visibility of the Frame
+	 */
 	public void setVisibilityViews()
 	{
 		frame.setVisible(true);

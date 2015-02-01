@@ -33,8 +33,7 @@ public class LeftMenu {
     public JPanel createButtons()
     {
     	JPanel leftMenu = new JPanel();
-		leftMenu.setLayout(new GridLayout(8, 1));
-		leftMenu.setBorder(new EmptyBorder(20, 10, 20, 10));		
+		leftMenu.setLayout(new GridLayout(8, 1));		
 
         JButton startButton = new JButton("Start");
         startButton.addActionListener(new ActionListener() {
@@ -82,7 +81,7 @@ public class LeftMenu {
 		
 		JButton alpacalypseButton = new JButton(new ImageIcon(getClass().getResource("/files/alpacalypse-6.png")));
 		
-		String soundName = "march.au";  
+		String soundName = "Psycho_Scream.wav";  
 		
 		alpacalypseButton.addActionListener(new ActionListener() {
 			@Override
