@@ -105,6 +105,18 @@ public class Hunter extends Animal implements Actor
             		          		
             	}
             }
+         // If the next location is grass, it will be crushed
+            if (animal instanceof Grass) {
+            	Grass grass = (Grass) animal;
+            	if (rand.nextInt(1) == 0)
+        		{
+        			grass.setDead();
+            		return where;              			
+        		}
+        		else {
+        			return null;
+        		}		          		
+            }
         }
         return null;
     }
