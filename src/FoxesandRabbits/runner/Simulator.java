@@ -26,6 +26,7 @@ import FoxesandRabbits.model.Alpaca;
 import FoxesandRabbits.model.Borg;
 import FoxesandRabbits.model.Fox;
 import FoxesandRabbits.model.Hunter;
+import FoxesandRabbits.model.Animal;
 import FoxesandRabbits.model.Rabbit;
 import FoxesandRabbits.model.Grass;
 import FoxesandRabbits.view.AbstractView;
@@ -69,10 +70,9 @@ public class Simulator extends JFrame
     private FieldStats stats;
     
     private MenuBar menuBar;
+    
     private LeftMenu leftMenu;
     
-    
-
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population;
@@ -148,10 +148,20 @@ public class Simulator extends JFrame
     {
     	return field;
     }
+    
+    /**
+     * Method for getting the animals
+     * @return the animals
+     */
     public List<Actor> getAnimals()
     {
     	return animals;
     }
+    
+    /**
+     * Getter for population.
+     * @return the population.
+     */
     public JLabel getPopulation()
     {
     	return population;
@@ -226,6 +236,9 @@ public class Simulator extends JFrame
         step = 0;
         animals.clear();
         populate();
+        Rabbit.DiseaseOff();
+        Animal.EbolaOff();
+
         
         // Show the starting state in the view.
         notifyViews();
@@ -292,4 +305,13 @@ public class Simulator extends JFrame
             }
         }
     }
+    
+    public static void DiseaseButton(){
+    	Rabbit.DiseaseOn();
+    }
+    
+    public static void EbolaButton(){
+    	Animal.EbolaOn();
+    }
+
 }

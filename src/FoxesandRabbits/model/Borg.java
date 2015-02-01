@@ -51,18 +51,33 @@ public class Borg extends Animal implements Actor
             energyLevel = ENERGY_LEVEL;
         }
     }
+    /*
+     * 
+     */
     public static int getAge()
     {
     	return MAX_AGE;
     }
+    
+    /*
+     * 
+     */
     public static void setAge(int age)
     {
     	MAX_AGE = age;
     }
+    
+    /*
+     * 
+     */
     public static int getEnergy()
     {
     	return ENERGY_LEVEL;
     }
+    
+    /*
+     * 
+     */
     public static void setEnergy(int energy)
     {
     	ENERGY_LEVEL = energy;
@@ -79,6 +94,7 @@ public class Borg extends Animal implements Actor
     {
         incrementAge();
         if(isActive()) {
+        	ebola();
         	Location newLocation = null;        	
         	if (energyLevel >= 1)
         	{

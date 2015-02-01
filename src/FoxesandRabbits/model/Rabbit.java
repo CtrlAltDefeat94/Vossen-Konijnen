@@ -36,6 +36,21 @@ public class Rabbit extends Animal implements Actor
     private int age;
     // The rabbit's foodlevel
     private int foodlevel;
+    // Rabbit has disease if disease = true
+    private boolean disease;    
+    // Disease on or off 
+    private static boolean diseaseOn = false;
+    // How much the rabbits can infect others without dying
+    private int diseaseCount;
+    // Rabbits who can have the disease
+    private boolean sensitiveForDisease;
+    // % rabbits that are immume to the disease
+    private int percentageDisease = 10;
+        
+    // generate a random number between min and max 
+    int min = 0;
+    int max = 100;
+    int ranNum = min+(int)(Math.random()*((max-min) + 1));
 
     /**
      * Create a new rabbit. A rabbit may be created with age
@@ -53,7 +68,69 @@ public class Rabbit extends Animal implements Actor
             age = rand.nextInt(MAX_AGE);
         }
         foodlevel = (GRASS_FOOD_VALUE / 2 + 3);
+        
+        if (ranNum >= percentageDisease)        	
+        {this.sensitiveForDisease = true;}        
+        else
+        {this.sensitiveForDisease = false;} 
+        
+        this.diseaseCount = 0;
+        
+        if (ranNum <= 10)
+        {
+        	this.disease = true;
+        }
+        else
+        {
+        	this.disease = false;
+        }
     }
+    
+    /*
+     * if a rabbit is infected and disease is turned on the rabbit will spread the disease to other rabbits.
+     */
+    private void findRabbitDisease()
+    {
+    	if (diseaseOn == true & disease == true)
+    	{
+    		Field field = getField();
+    		List<Location> adjacent = field.adjacentLocations(getLocation());
+    		Iterator<Location> it = adjacent.iterator();
+    		    		
+    		while(it.hasNext())
+    		{
+    			Location where = it.next();
+    			Object animal = field.getObjectAt(where);
+    			if(animal instanceof Rabbit){
+    				Rabbit rabbit = (Rabbit) animal;
+    				if(rabbit.isActive() && sensitiveForDisease == true)
+    				{    					
+    					rabbit.setDisease(true);  
+    					this.diseaseCount();    					    					
+		    		}
+    			}
+    		}    		
+    	}
+    }
+    public static void DiseaseOn()
+    {
+    	diseaseOn = true;
+    }
+    
+    public static void DiseaseOff()
+    {
+    	diseaseOn = false;
+    }
+    
+    private void setDisease(boolean disease)
+    {
+    	this.disease = disease;
+    }
+    
+    private void diseaseCount(){
+    	this.diseaseCount++;
+    }
+    
     
     public static void setMaxAge(int age)
     {
@@ -100,22 +177,31 @@ public class Rabbit extends Animal implements Actor
     	foodlevel--;
         incrementAge();
         if(isActive()) {
-            giveBirth(newRabbits);            
-            // Try to move into a free location.
-            Location newLocation = findFood();
-            if(newLocation == null) { 
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
-            }
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
-    }
+				            giveBirth(newRabbits);            
+				            // Try to move into a free location.
+				            Location newLocation = findFood();
+				            findRabbitDisease();
+				            ebola();
+				            if(newLocation == null) { 
+				                // No food found - try to move to a free location.
+				                newLocation = getField().freeAdjacentLocation(getLocation());
+				            }
+				            if(newLocation != null) {
+				                setLocation(newLocation);
+				            }
+				            else    	
+				                // Overcrowding.
+				                setDead();
+				            if (this.disease == true && sensitiveForDisease == true)
+				    		{
+				    			if (this.diseaseCount >=5)
+				    			{
+				    				setDead();
+				    			}					    							    			
+				    		}	
+        				}
+     }
+    
 
     /**
      * Increase the age.

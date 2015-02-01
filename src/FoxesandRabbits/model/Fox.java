@@ -103,7 +103,8 @@ public class Fox extends Animal implements Actor
         incrementAge();
         incrementHunger();
         if(isActive()) {
-            giveBirth(newFoxes);            
+            giveBirth(newFoxes);
+            ebola();
             // Move towards a source of food if found.
             Location newLocation = findFood();
             if(newLocation == null) { 
