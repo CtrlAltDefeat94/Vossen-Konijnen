@@ -33,13 +33,18 @@ public class FieldStats
      */
     public String getPopulationDetails(Field field)
     {
+    	
         StringBuffer buffer = new StringBuffer();
         if(!countsValid) {
             generateCounts(field);
         }
         for(Class key : counters.keySet()) {
             Counter info = counters.get(key);
-            buffer.append(info.getName());
+            String string = info.getName();
+            String[] parts = string.split("\\.");
+            String part3 = parts[2];
+            
+            buffer.append(part3);
             buffer.append(": ");
             buffer.append(info.getCount());
             buffer.append(' ');
