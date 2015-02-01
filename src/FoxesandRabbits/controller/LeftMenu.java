@@ -1,11 +1,21 @@
 package FoxesandRabbits.controller;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import FoxesandRabbits.runner.DynamicThread;
 import FoxesandRabbits.runner.Simulator;
@@ -23,7 +33,16 @@ public class LeftMenu {
     public JPanel createButtons()
     {
     	JPanel leftMenu = new JPanel();
-		leftMenu.setLayout(new GridLayout(0, 1));
+		leftMenu.setLayout(new GridLayout(8, 1));
+		leftMenu.setBorder(new EmptyBorder(20, 10, 20, 10));		
+
+        JButton startButton = new JButton("Start");
+        startButton.addActionListener(new ActionListener() {
+                           @Override
+						public void actionPerformed(ActionEvent e) {
+                        	   DynamicThread thread1 = new DynamicThread("thread1", simulator);
+                       }});
+        leftMenu.add(startButton);
         
         JButton pauseButton = new JButton("Pause");
         pauseButton.addActionListener(new ActionListener() {
@@ -38,15 +57,7 @@ public class LeftMenu {
 						public void actionPerformed(ActionEvent e) { DynamicThread.pause(); simulator.simulate(1); }
                        });
         leftMenu.add(oneStepButton);
-        
-        JButton startButton = new JButton("Start");
-        startButton.addActionListener(new ActionListener() {
-                           @Override
-						public void actionPerformed(ActionEvent e) {
-                        	   DynamicThread thread1 = new DynamicThread("thread1", simulator);
-                       }});
-        leftMenu.add(startButton);
-        
+                
         JButton hundredButton = new JButton("Hundred Step");
         hundredButton.addActionListener(new ActionListener() {
         	@Override
@@ -68,21 +79,15 @@ public class LeftMenu {
         	}});
                            
         leftMenu.add(hundredButton);
-        
-        JButton resetButton = new JButton("Reset");
-		resetButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				simulator.reset();
-			}
-		});
-		leftMenu.add(resetButton);
 		
-		JButton alpacalypseButton = new JButton("ALPACAlypse");
+		JButton alpacalypseButton = new JButton(new ImageIcon(getClass().getResource("/files/alpacalypse-6.png")));
+		
+		String soundName = "march.au";  
+		
 		alpacalypseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				simulator.alpacalypse();
+				playSound(soundName); simulator.alpacalypse();
 			}
 		});
 		leftMenu.add(alpacalypseButton);
@@ -105,7 +110,17 @@ public class LeftMenu {
 			}
 		});
 		
-		leftMenu.add(EbolaButton);
+		leftMenu.add(EbolaButton);	
+
+        
+        JButton resetButton = new JButton("Reset");
+		resetButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				simulator.reset();
+			}
+		});
+		leftMenu.add(resetButton);
 		leftMenu.add(resetButton);
 		
 		
@@ -121,4 +136,24 @@ public class LeftMenu {
     {
         button.setEnabled(true);
     }
+    /**
+     * Plays a sound 
+     * @param the sound to play
+     */
+    public void playSound(String soundName)
+    {
+      try 
+      {
+       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile( ));
+       Clip clip = AudioSystem.getClip( );
+       clip.open(audioInputStream);
+       clip.start( );
+      }
+      catch(Exception ex)
+      {
+        System.out.println("Error with playing sound.");
+        ex.printStackTrace( );
+      }
+    }
+
 }
