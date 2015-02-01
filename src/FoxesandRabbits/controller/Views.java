@@ -25,6 +25,7 @@ public class Views {
 	public Views(Simulator simulator) {
 		this.simulator = simulator;
 		frame = new JFrame("Alternative Views");
+		frame.setIconImage(new ImageIcon(getClass().getResource("/files/graph-icon.png")).getImage());
 		frame.add(createAltButton());
 		frame.pack();
 		frame.setVisible(false);

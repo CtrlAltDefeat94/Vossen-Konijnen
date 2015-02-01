@@ -3,11 +3,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -100,6 +103,9 @@ public class Simulator extends JFrame
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
+        
+        this.setIconImage(new ImageIcon(getClass().getResource("/files/icon.png")).getImage());
+        
         views = new ArrayList<AbstractView>();
         Views altViews = new Views(this);
         Settings settings = new Settings();

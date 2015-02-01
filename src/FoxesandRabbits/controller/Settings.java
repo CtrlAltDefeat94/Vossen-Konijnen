@@ -19,6 +19,7 @@ public class Settings {
 	
 	public Settings() {
 		frame = new JFrame("Settings");
+		frame.setIconImage(new ImageIcon(getClass().getResource("/files/Settings-Icon-4.png")).getImage());
 		frame.add(createWindow());
 		frame.pack();
 		frame.setVisible(false);

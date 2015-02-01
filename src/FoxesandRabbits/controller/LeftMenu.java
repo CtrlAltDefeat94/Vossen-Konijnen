@@ -75,7 +75,7 @@ public class LeftMenu {
 		
 		JButton alpacalypseButton = new JButton(new ImageIcon(getClass().getResource("/files/alpacalypse-6.png")));
 		
-		String soundName = "Psycho_Scream.wav";  
+		String soundName = "/files/Psycho_Scream.wav";  
 		
 		alpacalypseButton.addActionListener(new ActionListener() {
 			@Override
@@ -137,7 +137,7 @@ public class LeftMenu {
     {
       try 
       {
-       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile( ));
+       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src", soundName).getAbsoluteFile( ));
        Clip clip = AudioSystem.getClip( );
        clip.open(audioInputStream);
        clip.start( );
