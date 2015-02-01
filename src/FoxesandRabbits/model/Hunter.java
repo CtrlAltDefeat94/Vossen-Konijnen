@@ -26,8 +26,7 @@ public class Hunter extends Animal implements Actor
     private int age;
 
     /**
-     * Create a Borg. A Borg can be created as a new born (age zero
-     * and not hungry) or with a random age and energy level.
+     * Create a Hunter. A Hunter can be created as a new born (age zero) or with a random age
      * 
      * @param randomAge If true, the fox will have random age and hunger level.
      * @param field The field currently occupied.
@@ -46,11 +45,10 @@ public class Hunter extends Animal implements Actor
     }
     
     /**
-     * This is what the Borg does most of the time: it hunts for
-     * rabbits. In the process, it might assimilate, die of hunger,
-     * or die of old age.
+     * This is what the Hunter does most of the time: it hunts for
+     * animals
      * @param field The field currently occupied.
-     * @param newHunt A list to return newly assimilated Borg.
+     * @param newHunt A list to return newly created hunters
      */
     @Override
 	public void act(List<Actor> newHunt)
@@ -66,12 +64,6 @@ public class Hunter extends Animal implements Actor
             }
         }
     }
-
-    /**
-     * Increase the age. This could result in the borg death.
-     */
-    
-    
     /**
      * Look for victim adjacent to the current location.
      * Only the first live Victim is eaten.

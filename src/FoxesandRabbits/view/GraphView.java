@@ -12,6 +12,11 @@ import FoxesandRabbits.logic.Field;
 import FoxesandRabbits.logic.FieldStats;
 import FoxesandRabbits.runner.Simulator;
 
+/**
+ * creates a graphview of the population in the simulation
+ * @author Daniël Slobben
+ *
+ */
 public class GraphView extends AbstractView {
 	
 	private static final Color LIGHT_GRAY = new Color(0, 0, 0, 40);
@@ -70,7 +75,6 @@ public class GraphView extends AbstractView {
         // An internal image buffer that is used for painting. For
         // actual display, this image buffer is then copied to screen.
         private BufferedImage graphImage;
-        //private int lastVal1, lastVal2, lastVal3;
         private HashMap<Class, Integer> lastVal;
         private int yMax;
 
@@ -170,7 +174,6 @@ public class GraphView extends AbstractView {
             	Class class1 = it.next();
             	lastVal.put(class1, oldTop + (int) (lastVal.get(class1) * SCALE_FACTOR));
             }
-
             repaint();
         }
 
@@ -184,9 +187,6 @@ public class GraphView extends AbstractView {
             g.fillRect(0, 0, graphImage.getWidth(), graphImage.getHeight());
             repaint();
         }
-
-        // The following methods are redefinitions of methods
-        // inherited from superclasses.
 
         /**
          * Tell the layout manager how big we would like to be.
@@ -209,9 +209,6 @@ public class GraphView extends AbstractView {
          */
         public void paintComponent(Graphics g)
         {
-        	super.paintComponent(g);
-            Dimension size = getSize();
-            //g.clearRect(0, 0, size.width, size.height);
             if(graphImage != null) {
                 g.drawImage(graphImage, 0, 0, null);
             }

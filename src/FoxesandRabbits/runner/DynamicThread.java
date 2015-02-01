@@ -8,6 +8,7 @@ public class DynamicThread extends Thread
 	/**
 	 * Constructor with name for thread.
 	 * @param threadName The name for the thread.
+	 * @param simulator The simulator to use.
 	 */
 	public DynamicThread(String threadName, Simulator simulator)
 	{

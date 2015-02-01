@@ -7,7 +7,6 @@ import FoxesandRabbits.logic.*;
 
 /**
  * A simple model of a grass.
- * Grass age, breed, and die.
  * 
  * @author Mathijs
  * @version 29-01-2015
@@ -48,9 +47,9 @@ public class Grass extends Animal implements Actor
     }
     
     /**
-     * This is what the grass does most of the time - it runs 
-     * around. Sometimes it will breed or die of old age.
-     * @param newGrass A list to return newly born grasss.
+     * This is what the grass does most of the time - it
+     * creates new Grass
+     * @param newGrass A list to return newly created grass.
      */
     @Override
 	public void act(List<Actor> newGrass)

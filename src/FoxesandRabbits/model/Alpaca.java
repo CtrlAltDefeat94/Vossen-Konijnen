@@ -6,19 +6,19 @@ import java.util.Random;
 import FoxesandRabbits.logic.*;	
 
 /**
- * A simple model of a hunter.
- * hunters move and hunt.
+ * A simple model of a Alpaca.
+ * Alpacas move and hunt.
  * 
  * @author Mathijs Lindeboom
  * @version 2015.01.22
  */
 public class Alpaca extends Animal implements Actor
 {
-    // Characteristics shared by hunters (class variables).
+    // Characteristics shared by Alpacas (class variables).
     
 	// The age at which a rabbit can start to breed.
     private static int BREEDING_AGE = 6;
-    // The age to which a hunter can live.
+    // The age to which a Alpaca can live.
     private static final int MAX_AGE = 300;
     // The likelihood of a rabbit breeding.
     private static final double BREEDING_PROBABILITY = 1;
@@ -28,14 +28,14 @@ public class Alpaca extends Animal implements Actor
     private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
-    // The hunter's age.
+    // The Alpaca's age.
     private int age;
 
     /**
-     * Create a Borg. A Borg can be created as a new born (age zero
+     * Create a Alpaca. A Alpaca can be created as a new born (age zero
      * and not hungry) or with a random age and energy level.
      * 
-     * @param randomAge If true, the fox will have random age and hunger level.
+     * @param randomAge If true, the Alpaca will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -51,11 +51,9 @@ public class Alpaca extends Animal implements Actor
     }
     
     /**
-     * This is what the Borg does most of the time: it hunts for
-     * rabbits. In the process, it might assimilate, die of hunger,
-     * or die of old age.
+     * This is what the Alpaca does most of the time: hunt for everything.
      * @param field The field currently occupied.
-     * @param newHunt A list to return newly assimilated Borg.
+     * @param newHunt A list to return newly bred Alpacas
      */
     @Override
 	public void act(List<Actor> newAlpaca)
@@ -83,8 +81,8 @@ public class Alpaca extends Animal implements Actor
     {
     	double breedingProbability;
     	int maxLitterSize;
-    	breedingProbability = BREEDING_PROBABILITY / 2;
-    	maxLitterSize = MAX_LITTER_SIZE - 3;
+    	breedingProbability = BREEDING_PROBABILITY;
+    	maxLitterSize = MAX_LITTER_SIZE;
     	
         int births = 0;
         if(canBreed() && rand.nextDouble() <= breedingProbability) {

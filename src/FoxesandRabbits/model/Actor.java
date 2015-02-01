@@ -9,14 +9,13 @@ import java.util.*;
 public interface Actor
 {
     /**
-     * Voer het gebruikelijke gedrag van de deelnemer uit.
-     * @param newActors Een lijst waarin zojuist gemaakte 
-     * deelnemers worden opgeslagen
+     * Do the usual activity of the Actor
+     * @param newActors A list with the newly created actors
      */
     void act(List<Actor> newActors);
     
     /**
-     * Is de deelnemer nog steeds actief?
+     * is the Actor still active?
      */
     boolean isActive();
 }

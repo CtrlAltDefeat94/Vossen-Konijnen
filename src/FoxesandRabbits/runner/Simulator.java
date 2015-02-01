@@ -35,7 +35,7 @@ import FoxesandRabbits.view.GridView;
 import FoxesandRabbits.view.PieChart;
 /**
  * A simple predator-prey simulator, based on a rectangular field
- * containing rabbits and foxes.
+ * containing rabbits, foxes and various other animals.
  * 
  * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
@@ -288,6 +288,10 @@ public class Simulator extends JFrame
     {
         return stats.isViable(field);
     }
+    
+    /**
+     * Begins the alpacalypse by creating alpacas in the top left corner
+     */
     public void alpacalypse()
     {
         Random rand = Randomizer.getRandom();
@@ -306,10 +310,16 @@ public class Simulator extends JFrame
         }
     }
     
+    /**
+     * turns the disease for rabbits on
+     */
     public static void DiseaseButton(){
     	Rabbit.DiseaseOn();
     }
     
+    /**
+     * turns ebola on.
+     */
     public static void EbolaButton(){
     	Animal.EbolaOn();
     }

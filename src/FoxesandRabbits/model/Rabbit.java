@@ -177,29 +177,30 @@ public class Rabbit extends Animal implements Actor
     	foodlevel--;
         incrementAge();
         if(isActive()) {
-				            giveBirth(newRabbits);            
-				            // Try to move into a free location.
-				            Location newLocation = findFood();
-				            findRabbitDisease();
-				            ebola();
-				            if(newLocation == null) { 
-				                // No food found - try to move to a free location.
-				                newLocation = getField().freeAdjacentLocation(getLocation());
-				            }
-				            if(newLocation != null) {
-				                setLocation(newLocation);
-				            }
-				            else    	
-				                // Overcrowding.
-				                setDead();
-				            if (this.disease == true && sensitiveForDisease == true)
-				    		{
-				    			if (this.diseaseCount >=5)
-				    			{
-				    				setDead();
-				    			}					    							    			
-				    		}	
-        				}
+        	giveBirth(newRabbits);            
+			// Try to move into a free location.
+			Location newLocation = findFood();
+			findRabbitDisease();
+			ebola();
+			if(newLocation == null) { 
+				//No food found - try to move to a free location.
+			    newLocation = getField().freeAdjacentLocation(getLocation());
+			}
+			if(newLocation != null) {
+				setLocation(newLocation);
+            }
+            else {
+                // Overcrowding.
+                setDead();            	
+            }
+		    if (this.disease == true && sensitiveForDisease == true)
+	   		{
+	   			if (this.diseaseCount >=5)
+   			    {
+	  		     	setDead();
+   			    }	   			
+	   		}	
+        }        
      }
     
 

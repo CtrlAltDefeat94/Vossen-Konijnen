@@ -1,6 +1,7 @@
 package FoxesandRabbits.view;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -15,6 +16,12 @@ import javax.swing.JPanel;
 import FoxesandRabbits.logic.Field;
 import FoxesandRabbits.logic.FieldStats;
 import FoxesandRabbits.runner.Simulator;
+
+/**
+ * Creates a pie chart view of the population
+ * @author Daniël Slobben
+ *
+ */
 public class PieChart extends AbstractView {
 
 	private static PieChartPanel pie;
@@ -32,12 +39,20 @@ public class PieChart extends AbstractView {
         pie.newRun();
         add(pie);
 	}
-
+    
+	/**
+	 * updates the pie chart
+	 */
 	@Override
 	public void showStatus(int step, Field field, FieldStats stats) {
         pie.update(step, field, stats);	
 	}
-
+    
+	/**
+	 * Method to set a color for a specific animal
+	 * @param animalClass The animal to set a color for
+	 * @param color The color for the animal
+	 */
 	public void setColor(Class animalClass, Color color) {
 		colors.put(animalClass, color);
         classes = colors.keySet();		
@@ -133,8 +148,6 @@ public class PieChart extends AbstractView {
          * @param g The graphics context that can be used to draw on this component.
          */
 		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			Dimension size = getSize();
             if(pieImage != null) {
                 g.drawImage(pieImage, 0, 0, null);
             }
