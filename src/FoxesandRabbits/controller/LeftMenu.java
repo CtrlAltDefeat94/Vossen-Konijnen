@@ -4,6 +4,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -74,13 +77,10 @@ public class LeftMenu {
         leftMenu.add(hundredButton);
 		
 		JButton alpacalypseButton = new JButton(new ImageIcon(getClass().getResource("/files/alpacalypse-6.png")));
-		
-		String soundName = "/files/Psycho_Scream.wav";  
-		
 		alpacalypseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				playSound(soundName); simulator.alpacalypse();
+				playSound(); simulator.alpacalypse();
 			}
 		});
 		leftMenu.add(alpacalypseButton);
@@ -133,20 +133,17 @@ public class LeftMenu {
      * Plays a sound 
      * @param the sound to play
      */
-    public void playSound(String soundName)
+    public void playSound()
     {
-      try 
-      {
-       AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src", soundName).getAbsoluteFile( ));
-       Clip clip = AudioSystem.getClip( );
-       clip.open(audioInputStream);
-       clip.start( );
-      }
-      catch(Exception ex)
-      {
-        System.out.println("Error with playing sound.");
-        ex.printStackTrace( );
-      }
+    	try {
+    		 URL is= getClass().getResource("/files/Psycho_Scream.wav");
+    	   	AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(is);
+    	     Clip clip = AudioSystem.getClip();
+    	     clip.open(audioInputStream);
+    	     clip.start( );
+    	} catch (Exception ex) {
+    	     ex.printStackTrace();
+    	}
     }
 
 }
