@@ -116,7 +116,7 @@ public class Borg extends Animal implements Actor
         	}
         	if (getField().alone(getLocation()) == true)
         	{
-        		if (rand.nextInt(3) == 0)
+        		if (rand.nextInt(4) == 0)
         		{
         		    setDead();
         		}

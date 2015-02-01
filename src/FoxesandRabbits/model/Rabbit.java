@@ -67,7 +67,7 @@ public class Rabbit extends Animal implements Actor
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
-        foodlevel = (GRASS_FOOD_VALUE / 2 + 3);
+        foodlevel = (20);
         
         if (ranNum >= percentageDisease)        	
         {this.sensitiveForDisease = true;}        

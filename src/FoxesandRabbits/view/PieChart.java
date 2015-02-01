@@ -93,7 +93,10 @@ public class PieChart extends AbstractView {
     			Iterator<Class> it = classes.iterator();
                 while (it.hasNext()) {
                 	Class class1 = it.next();
-                	total += stats.getPopulationCount(field, class1);
+                	
+                if (stats.getPopulationCount(field, class1) != -1) {
+                	    total += stats.getPopulationCount(field, class1);
+                	}
                 }
     			
                 int previous = 0;

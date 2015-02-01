@@ -307,7 +307,7 @@ public class Simulator extends JFrame
                     alpacaCount++;
                 }
             }
-        }
+        }        
     }
     
     /**

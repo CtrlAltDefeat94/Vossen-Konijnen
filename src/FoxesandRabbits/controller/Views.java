@@ -40,14 +40,14 @@ public class Views {
 		subPanel1.setColor(Fox.class, Color.BLUE);
 		subPanel1.setColor(Borg.class, Color.BLACK);
 		subPanel1.setColor(Hunter.class, Color.RED);
-        //subPanel1.setColor(Alpaca.class, Color.PINK);
+        subPanel1.setColor(Alpaca.class, Color.PINK);
 		
 		PieChart subPanel2 = new PieChart(200, 280, simulator);
 		subPanel2.setColor(Rabbit.class, Color.ORANGE);
 		subPanel2.setColor(Fox.class, Color.BLUE);
 		subPanel2.setColor(Borg.class, Color.BLACK);
 		subPanel2.setColor(Hunter.class, Color.RED);
-        //subPanel2.setColor(Alpaca.class, Color.PINK);
+        subPanel2.setColor(Alpaca.class, Color.PINK);
 		
 		tabbedPane.add("Graphview", subPanel1);
 		tabbedPane.add("PieChart", subPanel2);

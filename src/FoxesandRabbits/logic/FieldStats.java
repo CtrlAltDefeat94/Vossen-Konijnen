@@ -121,7 +121,10 @@ public class FieldStats
         }
 
         Counter counter = counters.get(key);
-        return counter.getCount();
+        if (counter != null) {
+            return counter.getCount();
+        }
+        return -1;
     }
     
     /**
