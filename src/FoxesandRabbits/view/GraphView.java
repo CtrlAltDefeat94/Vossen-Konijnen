@@ -60,7 +60,8 @@ public class GraphView extends AbstractView {
     {
         if(step == 0){
         	graph.newRun();
-        } else {
+        } 
+        else {
         	graph.update(step, field, stats);
         }
     }

@@ -22,6 +22,8 @@ public class Borg extends Animal implements Actor
     private static int MAX_AGE = 100;
     // The Energy level the Borg Start with
     private static int ENERGY_LEVEL = 10;
+    // The chance the Borg has to assimilate someone in percentage
+    private static int ASSIMILATION_CHANCE = 50;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -51,36 +53,29 @@ public class Borg extends Animal implements Actor
             energyLevel = ENERGY_LEVEL;
         }
     }
-    /*
-     * 
-     */
     public static int getAge()
     {
     	return MAX_AGE;
     }
-    
-    /*
-     * 
-     */
     public static void setAge(int age)
     {
     	MAX_AGE = age;
     }
-    
-    /*
-     * 
-     */
     public static int getEnergy()
     {
     	return ENERGY_LEVEL;
     }
-    
-    /*
-     * 
-     */
     public static void setEnergy(int energy)
     {
     	ENERGY_LEVEL = energy;
+    }
+    public static int getAssimilationChance()
+    {
+    	return ASSIMILATION_CHANCE;
+    }
+    public static void setAssimilationChance(int chance)
+    {
+    	ASSIMILATION_CHANCE = chance;
     }
     /**
      * This is what the Borg does most of the time: it hunts for
@@ -159,7 +154,7 @@ public class Borg extends Animal implements Actor
             if(animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
                 if(rabbit.isActive()) { 
-                	if (rand.nextInt(2) == 0)
+                	if (rand.nextInt(100) < ASSIMILATION_CHANCE)
             		{
                 		rabbit.setDead();
                         return where;
@@ -173,7 +168,7 @@ public class Borg extends Animal implements Actor
             if (animal instanceof Fox) {
             	Fox fox = (Fox) animal;
             	if(fox.isActive()) {
-            		if (rand.nextInt(2) == 0)
+            		if (rand.nextInt(100) == ASSIMILATION_CHANCE)
             		{
             			fox.setDead();
                 		return where;              			

@@ -35,9 +35,9 @@ public class Settings {
 		JPanel panelFox = new JPanel();
 	    panelFox.setLayout(new GridLayout(0, 2, 5, 5));
 	    
-	    JLabel labelAgeFox = new JLabel("Set the Fox maximum age");
-		JSlider sliderAgeFox = new JSlider(JSlider.HORIZONTAL, 0, 1000, Fox.getMaxAge());		
-		sliderAgeFox.setMajorTickSpacing(200);
+	    JLabel labelAgeFox = new JLabel("Set the Foxes maximum age");
+		JSlider sliderAgeFox = new JSlider(JSlider.HORIZONTAL, 0, 500, Fox.getMaxAge());		
+		sliderAgeFox.setMajorTickSpacing(100);
 		sliderAgeFox.setPaintTicks(true);
 		sliderAgeFox.setPaintLabels(true);
 		sliderAgeFox.addChangeListener(new ChangeListener() {			
@@ -50,7 +50,7 @@ public class Settings {
 		panelFox.add(labelAgeFox);
 		panelFox.add(sliderAgeFox);
 		
-		JLabel labelFoodValueFox = new JLabel("Set the Foxes Rabbit_Food_Value");
+		JLabel labelFoodValueFox = new JLabel("Set the amount of food a Fox get from a Rabbit");
 		JSlider sliderFoodValueFox = new JSlider(JSlider.HORIZONTAL, 0, 100, Fox.getRabbitFoodValue());
 		sliderFoodValueFox.setMajorTickSpacing(10);
 		sliderFoodValueFox.setPaintTicks(true);
@@ -65,7 +65,7 @@ public class Settings {
 		panelFox.add(labelFoodValueFox);
 		panelFox.add(sliderFoodValueFox);
 		
-		JLabel labelBreedingFox = new JLabel("Set the Fox breeding age");
+		JLabel labelBreedingFox = new JLabel("Set the Foxes breeding age");
 		JSlider sliderBreedingFox = new JSlider(JSlider.HORIZONTAL, 0, 100, Fox.getBreedingAge());
 		sliderBreedingFox.setMajorTickSpacing(10);
 		sliderBreedingFox.setPaintTicks(true);
@@ -80,7 +80,7 @@ public class Settings {
 		panelFox.add(labelBreedingFox);
 		panelFox.add(sliderBreedingFox);
 		
-		JLabel labelLitterSizeFox = new JLabel("Set the Fox Maximum Litter Size");
+		JLabel labelLitterSizeFox = new JLabel("Set the Foxes maximum litter size");
 		JSlider sliderLitterSizeFox = new JSlider(JSlider.HORIZONTAL, 0, 20, Fox.getLitterSize());
 		sliderLitterSizeFox.setMajorTickSpacing(3);
 		sliderLitterSizeFox.setPaintTicks(true);
@@ -101,9 +101,9 @@ public class Settings {
 		JPanel panelRabbit = new JPanel();
 	    panelRabbit.setLayout(new GridLayout(0, 2, 5, 5));
 	    
-	    JLabel labelAgeRabbit = new JLabel("Set the Rabbit maximum age");
-		JSlider sliderAgeRabbit = new JSlider(JSlider.HORIZONTAL, 0, 1000, Rabbit.getMaxAge());		
-		sliderAgeRabbit.setMajorTickSpacing(200);
+	    JLabel labelAgeRabbit = new JLabel("Set the Rabbits maximum age");
+		JSlider sliderAgeRabbit = new JSlider(JSlider.HORIZONTAL, 0, 500, Rabbit.getMaxAge());		
+		sliderAgeRabbit.setMajorTickSpacing(100);
 		sliderAgeRabbit.setPaintTicks(true);
 		sliderAgeRabbit.setPaintLabels(true);
 		sliderAgeRabbit.addChangeListener(new ChangeListener() {			
@@ -116,7 +116,7 @@ public class Settings {
 		panelRabbit.add(labelAgeRabbit);
 		panelRabbit.add(sliderAgeRabbit);
 		
-		JLabel labelBreedingRabbit = new JLabel("Set the Rabbit breeding age");
+		JLabel labelBreedingRabbit = new JLabel("Set the Rabbits breeding age");
 		JSlider sliderBreedingRabbit = new JSlider(JSlider.HORIZONTAL, 0, 100, Rabbit.getBreedingAge());
 		sliderBreedingRabbit.setMajorTickSpacing(10);
 		sliderBreedingRabbit.setPaintTicks(true);
@@ -131,8 +131,8 @@ public class Settings {
 		panelRabbit.add(labelBreedingRabbit);
 		panelRabbit.add(sliderBreedingRabbit);
 		
-		JLabel labelLitterSizeRabbit = new JLabel("Set the Rabbit Maximum Litter Size");
-		JSlider sliderLitterSizeRabbit = new JSlider(JSlider.HORIZONTAL, 0, 20, Rabbit.getLitterSize());
+		JLabel labelLitterSizeRabbit = new JLabel("Set the Rabbits maximum litter size");
+		JSlider sliderLitterSizeRabbit = new JSlider(JSlider.HORIZONTAL, 0, 21, Rabbit.getLitterSize());
 		sliderLitterSizeRabbit.setMajorTickSpacing(3);
 		sliderLitterSizeRabbit.setPaintTicks(true);
 		sliderLitterSizeRabbit.setPaintLabels(true);
@@ -146,9 +146,9 @@ public class Settings {
 		panelRabbit.add(labelLitterSizeRabbit);
 		panelRabbit.add(sliderLitterSizeRabbit);		
 		
-		JLabel labelFoodValueRabbit = new JLabel("Set the Rabbit GRASS_FOOD_VALUE");
-		JSlider sliderFoodValueRabbit = new JSlider(JSlider.HORIZONTAL, 0, 1000, Rabbit.getFoodValue());		
-		sliderFoodValueRabbit.setMajorTickSpacing(200);
+		JLabel labelFoodValueRabbit = new JLabel("Set the amount of food a Rabbit gets from Grass");
+		JSlider sliderFoodValueRabbit = new JSlider(JSlider.HORIZONTAL, 0, 21, Rabbit.getFoodValue());		
+		sliderFoodValueRabbit.setMajorTickSpacing(3);
 		sliderFoodValueRabbit.setPaintTicks(true);
 		sliderFoodValueRabbit.setPaintLabels(true);
 		sliderFoodValueRabbit.addChangeListener(new ChangeListener() {			
@@ -197,6 +197,21 @@ public class Settings {
 		});
 		panelBorg.add(labelBreedingBorg);
 		panelBorg.add(sliderBreedingBorg);
+		
+		JLabel labelChanceBorg = new JLabel("Set the chance that a borg kills a Rabbit or Fox");
+		JSlider sliderChanceBorg = new JSlider(JSlider.HORIZONTAL, 0, 100, Borg.getAssimilationChance());
+		sliderChanceBorg.setMajorTickSpacing(10);
+		sliderChanceBorg.setPaintTicks(true);
+		sliderChanceBorg.setPaintLabels(true);
+		sliderChanceBorg.addChangeListener(new ChangeListener() {			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				Borg.setAssimilationChance(source.getValue());				
+			}
+		});
+		panelBorg.add(labelChanceBorg);
+		panelBorg.add(sliderChanceBorg);
 		
 		tabbedPane.add("Borg", panelBorg);		
 //----------------------------------------------------------------------------------------------		

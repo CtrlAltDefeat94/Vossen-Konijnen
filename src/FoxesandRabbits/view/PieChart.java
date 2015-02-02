@@ -36,8 +36,19 @@ public class PieChart extends AbstractView {
 		classes = new HashSet<Class>();
 		colors = new HashMap<Class, Color>();
         pie = new PieChartPanel(width, height);
+        
         pie.newRun();
         add(pie);
+	}
+
+    /**
+	 * Method to set a color for a specific animal
+	 * @param animalClass The animal to set a color for
+	 * @param color The color for the animal
+	 */
+	public void setColor(Class animalClass, Color color) {
+		colors.put(animalClass, color);
+        classes = colors.keySet();		
 	}
     
 	/**
@@ -47,16 +58,6 @@ public class PieChart extends AbstractView {
 	public void showStatus(int step, Field field, FieldStats stats) {
         pie.update(step, field, stats);	
 	}
-    
-	/**
-	 * Method to set a color for a specific animal
-	 * @param animalClass The animal to set a color for
-	 * @param color The color for the animal
-	 */
-	public void setColor(Class animalClass, Color color) {
-		colors.put(animalClass, color);
-        classes = colors.keySet();		
-	}
 	
 	class PieChartPanel extends JPanel
     {
@@ -65,7 +66,7 @@ public class PieChart extends AbstractView {
         private BufferedImage pieImage;
 		
 		/**
-         * Create a new, empty GraphPanel.
+         * Create an empty PieChartPanel
          */
         public PieChartPanel(int width, int height)
         {
@@ -81,37 +82,31 @@ public class PieChart extends AbstractView {
             if (classes.size() >= 2) {
                 stats.reset();
                 
-                Graphics g = pieImage.getGraphics();
-
-                int height = pieImage.getHeight();
-                int width = pieImage.getWidth();
-
-                g.setColor(this.getBackground());
-    			g.fillRect(0, 0, width, height);
-    			
-    			int total = 0;    			
+    			int totalPopulation = 0;    			
     			Iterator<Class> it = classes.iterator();
                 while (it.hasNext()) {
-                	Class class1 = it.next();
-                	
-                if (stats.getPopulationCount(field, class1) != -1) {
-                	    total += stats.getPopulationCount(field, class1);
+                	Class currentClass = it.next();                	
+                    if (stats.getPopulationCount(field, currentClass) != -1) {
+                	    totalPopulation += stats.getPopulationCount(field, currentClass);
                 	}
                 }
+                int height = pieImage.getHeight();
+                int width = pieImage.getWidth();
+                
+                Graphics g = pieImage.getGraphics();    			
     			
                 int previous = 0;
                 it = classes.iterator();
                 while (it.hasNext()) {
-                	Class class1 = it.next();
-                	int count = stats.getPopulationCount(field, class1);
-                	g.setColor(colors.get(class1));
-                	double arc = ((double)count / (double)total) * (double)360;
+                	Class currentClass = it.next();
+                	int count = stats.getPopulationCount(field, currentClass);
+                	g.setColor(colors.get(currentClass));
+                	double arc = ((double)count / (double)totalPopulation) * (double)360;
                 	Long l = Math.round(arc);
                 	int newArc = Integer.valueOf(l.intValue());
                 	g.fillArc(10, 10, width - 20, height - 20, previous, newArc);
                 	previous += newArc;
-                }
-                
+                }                
                 repaint();
             }
         }
