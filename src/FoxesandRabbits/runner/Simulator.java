@@ -305,7 +305,6 @@ public class Simulator extends JFrame
         Random rand = Randomizer.getRandom();
         int amountAlpacasAtStart = rand.nextInt(20);
         int alpacaCount = 0;
-        field.clear();
         for(int row = 0; row <= 4; row++) {
             for(int col = 0; col <= 5; col++) {
                 if(alpacaCount <= amountAlpacasAtStart) {
