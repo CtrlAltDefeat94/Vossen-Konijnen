@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import FoxesandRabbits.controller.LeftMenu;
+import FoxesandRabbits.controller.Legenda;
 import FoxesandRabbits.controller.MenuBar;
 import FoxesandRabbits.controller.Settings;
 import FoxesandRabbits.controller.Views;
@@ -136,6 +137,7 @@ public class Simulator extends JFrame
         Container contents = getContentPane();
         contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(gridView.getFieldView(), BorderLayout.CENTER);
+        contents.add(new Legenda(), BorderLayout.EAST);
         contents.add(population, BorderLayout.SOUTH);
         contents.add(leftMenu, BorderLayout.WEST);
         
